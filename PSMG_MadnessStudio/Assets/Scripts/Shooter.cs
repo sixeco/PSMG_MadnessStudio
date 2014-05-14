@@ -7,6 +7,8 @@ public class Shooter : MonoBehaviour {
     public Transform shotPosLeft;
     public Transform shotPosRight;
 
+    public GameObject debrisPrefab;
+
     public AudioClip[] shotSounds;
 
     public float shotForce = 1000.0f;
@@ -49,8 +51,8 @@ public class Shooter : MonoBehaviour {
                 Rigidbody shotRight = Instantiate(projectile, shotPosRight.position, shotPosRight.rotation) as Rigidbody;
                 Vector3 shotVectorLeft = hitInfo.point - shotLeft.transform.position;
                 Vector3 shotVectorRight = hitInfo.point - shotRight.transform.position;
-                shotLeft.AddForce(shotPosLeft.transform.forward * shotForce);
-                shotRight.AddForce(shotPosRight.transform.forward * shotForce);
+                //shotLeft.AddForce(shotPosLeft.transform.forward * shotForce);
+                //shotRight.AddForce(shotPosRight.transform.forward * shotForce);
 
                 int shotIndex = Random.Range(0, 3);
                 audio.clip = shotSounds[shotIndex];
