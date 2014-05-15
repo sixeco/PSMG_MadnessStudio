@@ -7,6 +7,13 @@ public class PokeScript : MonoBehaviour {
 
     void OnMouseDown()
     {
-        rigidbody.AddForce(new Vector3(0, 0, force), ForceMode.Impulse);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            //rigidbody.AddForce(new Vector3(0, 0, force), ForceMode.Impulse);
+            rigidbody.AddForceAtPosition((transform.position - hit.point) * force, hit.point, ForceMode.Impulse);
+        }
     }
 }

@@ -4,8 +4,10 @@ using System.Collections;
 public class Shooter : MonoBehaviour {
 
     public Rigidbody projectile;
+    public Rigidbody rocket;
     public Transform shotPosLeft;
     public Transform shotPosRight;
+    public Transform rocketShot;
 
     public GameObject debrisPrefab;
 
@@ -18,9 +20,6 @@ public class Shooter : MonoBehaviour {
     float horizontalRotation = 0.0f;
     public float upDownRange = 70.0f;
     public float leftRightRange = 70.0f;
-
-    public float coolDown = 0.2f;
-    public float coolDownRemain = 0;
 
     public float range = 100.0f;
 
@@ -41,7 +40,6 @@ public class Shooter : MonoBehaviour {
         gameObject.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
        
         if(Input.GetButtonDown("Fire1")){
-            coolDownRemain = coolDown;
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
             RaycastHit hitInfo;
 
@@ -51,12 +49,27 @@ public class Shooter : MonoBehaviour {
                 Rigidbody shotRight = Instantiate(projectile, shotPosRight.position, shotPosRight.rotation) as Rigidbody;
                 Vector3 shotVectorLeft = hitInfo.point - shotLeft.transform.position;
                 Vector3 shotVectorRight = hitInfo.point - shotRight.transform.position;
-                //shotLeft.AddForce(shotPosLeft.transform.forward * shotForce);
-                //shotRight.AddForce(shotPosRight.transform.forward * shotForce);
+                shotLeft.AddForce(shotVectorLeft * shotForce, ForceMode.Acceleration);
+                shotRight.AddForce(shotVectorRight * shotForce, ForceMode.Acceleration);
+
+                /* Spawn Prefab at hitPoint
+                Vector3 hitPoint = hitInfo.point;
+                GameObject go = hitInfo.collider.gameObject;
+                Instantiate(debrisPrefab, hitPoint, Quaternion.identity);
+                */
 
                 int shotIndex = Random.Range(0, 3);
                 audio.clip = shotSounds[shotIndex];
                 audio.Play();
+            }
+        }
+
+        if(Input.GetButtonDown("Fire2")){
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            RaycastHit hitInfo;
+
+            if(Physics.Raycast(ray, out hitInfo, range)){
+                Rigidbody rocketProjectile = Instantiate(rocket, rocketShot.position, rocketShot.rotation) as Rigidbody;
             }
         }
 	}
