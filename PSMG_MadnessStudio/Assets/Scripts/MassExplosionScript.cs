@@ -34,7 +34,7 @@ public class MassExplosionScript : MonoBehaviour {
                     //Create Explosion force
                     c.rigidbody.AddExplosionForce(force, hit.point, explosionRadius, explosionAnchor, ForceMode.Impulse);
 
-                    GameObject explosion = Instantiate(expPrefab, hit.point, Quaternion.identity) as GameObject;
+                    //GameObject explosion = Instantiate(expPrefab, hit.point, Quaternion.identity) as GameObject;
                 }
 
             }

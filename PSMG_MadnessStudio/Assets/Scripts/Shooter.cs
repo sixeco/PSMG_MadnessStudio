@@ -63,14 +63,5 @@ public class Shooter : MonoBehaviour {
                 audio.Play();
             }
         }
-
-        if(Input.GetButtonDown("Fire2")){
-            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-            RaycastHit hitInfo;
-
-            if(Physics.Raycast(ray, out hitInfo, range)){
-                Rigidbody rocketProjectile = Instantiate(rocket, rocketShot.position, rocketShot.rotation) as Rigidbody;
-            }
-        }
 	}
 }
