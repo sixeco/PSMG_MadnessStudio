@@ -51,7 +51,7 @@ public class Shooter : MonoBehaviour {
 
             if(Physics.Raycast(ray, out hitInfo, range)){
 
-                if (!shotMode)
+                if (shotMode)
                 {
                     Rigidbody shotLeft = Instantiate(projectile, shotPosLeft.position, shotPosLeft.rotation) as Rigidbody;
                     Rigidbody shotRight = Instantiate(projectile, shotPosRight.position, shotPosRight.rotation) as Rigidbody;
@@ -62,7 +62,7 @@ public class Shooter : MonoBehaviour {
                     int shotIndex = Random.Range(0, 3);
                     audio.clip = smokeShotSounds[shotIndex];
                     audio.Play();
-                }else if(shotMode)
+                }else if(!shotMode)
                 {
                     Vector3 hitPoint = hitInfo.point;
                     GameObject go = hitInfo.collider.gameObject;
