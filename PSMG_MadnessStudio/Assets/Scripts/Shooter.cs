@@ -29,7 +29,6 @@ public class Shooter : MonoBehaviour {
 
     void Start()
     {
-        Screen.lockCursor = true;
         shotMode = false;
     }
 
