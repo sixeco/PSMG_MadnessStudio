@@ -7,11 +7,10 @@ public class Shooter : MonoBehaviour {
     public Rigidbody rocket;
     public Transform shotPosLeft;
     public Transform shotPosRight;
-    public Transform rocketShot;
 
     public bool shotMode;
 
-    public GameObject debrisPrefab;
+    public GameObject spark;
 
     public float laserForce = 10;
 
@@ -36,15 +35,6 @@ public class Shooter : MonoBehaviour {
 
 	void Update () {
 
-        //Rotation
-        
-        horizontalRotation += Input.GetAxis("Mouse X") * mouseSensitivity;
-        horizontalRotation = Mathf.Clamp(horizontalRotation, -leftRightRange, leftRightRange);
-
-        verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-        verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
-        gameObject.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
-       
         if(Input.GetButtonDown("Fire1")){
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
             RaycastHit hitInfo;
@@ -62,15 +52,17 @@ public class Shooter : MonoBehaviour {
                     int shotIndex = Random.Range(0, 3);
                     audio.clip = smokeShotSounds[shotIndex];
                     audio.Play();
+
                 }else if(!shotMode)
                 {
                     Vector3 hitPoint = hitInfo.point;
                     GameObject go = hitInfo.collider.gameObject;
-                    //Instantiate(debrisPrefab, hitPoint, Quaternion.identity);
+                    
                     if (go.rigidbody != null)
                     {
                         go.rigidbody.AddForceAtPosition((go.transform.position - hitPoint) * laserForce, hitPoint, ForceMode.Impulse);
-                    }
+                        Instantiate(spark, hitPoint, Quaternion.Euler(go.transform.position - hitPoint));
+                    } 
                     int shotIndex = Random.Range(0, 3);
                     audio.clip = laserShotSounds[shotIndex];
                     audio.Play();
