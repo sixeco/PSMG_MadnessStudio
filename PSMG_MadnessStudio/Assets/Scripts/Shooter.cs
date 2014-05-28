@@ -8,7 +8,7 @@ public class Shooter : MonoBehaviour {
     public Transform shotPosLeft;
     public Transform shotPosRight;
 
-    public bool shotMode;
+    bool shotMode;
 
     public GameObject spark;
 
@@ -51,8 +51,6 @@ public class Shooter : MonoBehaviour {
                     shotRight.AddForce(shotVectorRight * shotForce, ForceMode.Acceleration);
                     int shotIndex = Random.Range(0, 3);
                     audio.clip = smokeShotSounds[shotIndex];
-                    audio.Play();
-
                 }else if(!shotMode)
                 {
                     Vector3 hitPoint = hitInfo.point;
@@ -61,15 +59,16 @@ public class Shooter : MonoBehaviour {
                     if (go.rigidbody != null)
                     {
                         go.rigidbody.AddForceAtPosition((go.transform.position - hitPoint) * laserForce, hitPoint, ForceMode.Impulse);
-                        Instantiate(spark, hitPoint, Quaternion.Euler(go.transform.position - hitPoint));
+                        GameObject temp = spark;
+                        Instantiate(temp, hitPoint, go.rigidbody.rotation);
                     } 
                     int shotIndex = Random.Range(0, 3);
                     audio.clip = laserShotSounds[shotIndex];
-                    audio.Play();
                 }
+                audio.Play();
             }
         }
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.F))
         {
             shotMode = !shotMode;
         }
