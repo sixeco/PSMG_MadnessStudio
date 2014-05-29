@@ -24,6 +24,6 @@ public class CameraRotation : MonoBehaviour {
         verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
         verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
         
-        //gameObject.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
+        gameObject.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
 	}
 }

@@ -13,7 +13,7 @@ public class GazeTestRotate : MonoBehaviourWithGazeComponent {
 
     public override void OnGazeStay(RaycastHit hit)
     {
-        
+        transform.Rotate(0, 0, rotationsPerMinute * Time.deltaTime);
     }
 
     public override void OnGazeExit()

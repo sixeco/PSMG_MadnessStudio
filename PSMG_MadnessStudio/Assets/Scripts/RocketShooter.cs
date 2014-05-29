@@ -9,7 +9,7 @@ public class RocketShooter : MonoBehaviour {
     public AudioClip rocketSound;
 
 	void Update () {
-        if (Input.GetButtonDown("Fire2")) 
+        if (Input.GetKeyDown(KeyCode.Mouse1)) 
         {
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
             RaycastHit hit;
