@@ -11,19 +11,27 @@ public class CameraRotation : MonoBehaviour {
     float verticalRotation = 0.0f;
     float horizontalRotation = 0.0f;
 
+    private bool isActive;
+
     void Start()
     {
         Screen.lockCursor = true;
+        isActive = this.GetComponent<TurretActivation>().isActive;
     }
 
 	void Update () {
 
-        horizontalRotation += Input.GetAxis("Mouse X") * mouseSensitivity;
-        horizontalRotation = Mathf.Clamp(horizontalRotation, -leftRightRange, leftRightRange);
+        isActive = this.GetComponent<TurretActivation>().isActive;
 
-        verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-        verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
-        
-        this.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
+        if (isActive)
+        {
+            horizontalRotation += Input.GetAxis("Mouse X") * mouseSensitivity;
+            horizontalRotation = Mathf.Clamp(horizontalRotation, -leftRightRange, leftRightRange);
+
+            verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+            verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
+
+            this.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
+        }
 	}
 }
