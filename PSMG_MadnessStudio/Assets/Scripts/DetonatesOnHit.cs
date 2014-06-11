@@ -58,14 +58,12 @@ public class DetonatesOnHit : MonoBehaviour {
             c.rigidbody.AddExplosionForce(explosionForce, explosionPoint, explosionRadius, explosionAnchor, ForceMode.Impulse);
             Destroy(gameObject);
 
-            /*
             HasHealth h = c.GetComponent<HasHealth>();
             if(h != null){
                 float distance = Vector3.Distance(explosionPoint, c.transform.position);
                 float damageRatio = 1f - (distance / explosionRadius);
                 h.RecieveDamage(damage * damageRatio);
             }
-             * */
         }
         
     }
