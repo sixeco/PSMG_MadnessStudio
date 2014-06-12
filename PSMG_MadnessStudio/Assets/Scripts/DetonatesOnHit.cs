@@ -17,12 +17,11 @@ public class DetonatesOnHit : MonoBehaviour {
 
     void OnCollisionEnter()
     {
-        Debug.Log("OnCollisionEnter");
+        
     }
 
     void OnTriggerEnter()
     {
-        Debug.Log("OnTriggerEnter");
         Detonate();
     }
 

@@ -31,11 +31,11 @@ public class Shooter : MonoBehaviour {
     void Start()
     {
         coolDownRemain = 0;
-        shotMode = false;
+        shotMode = true;
         turn = true;
         isActive = this.GetComponent<TurretActivation>().isActive;
         coolDownLaser = this.transform.parent.gameObject.transform.parent.GetComponent<GeneralCoolDowns>().laserCoolDown;
-        coolDownGrenade = this.transform.parent.gameObject.transform.parent.GetComponent<GeneralCoolDowns>().grenadeCoolDown;
+        coolDownGrenade = this.transform.parent.gameObject.transform.parent.GetComponent<GeneralCoolDowns>().coolDownGrenade;
     }
 
 	void Update () {
