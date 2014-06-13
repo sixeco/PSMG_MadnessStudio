@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using iViewX;
 
 public class CameraRotation : MonoBehaviour {
 
@@ -15,7 +16,7 @@ public class CameraRotation : MonoBehaviour {
 
     void Start()
     {
-        Screen.lockCursor = true;
+        //Screen.lockCursor = true;
         isActive = this.GetComponent<TurretActivation>().isActive;
     }
 

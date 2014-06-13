@@ -15,8 +15,6 @@ public class AOITestRects : MonoBehaviour {
     float maxRange;
 
     public float rotationSpeed = 10.0f;
-    public float upDownRange = 70.0f;
-    public float leftRightRange = 70.0f;
     Vector3 rotation;
 
 	// Use this for initialization
@@ -39,7 +37,7 @@ public class AOITestRects : MonoBehaviour {
 	void Update () {
         Vector2 gazeInput = gazeModel.posGazeLeft + gazeModel.posGazeRight;
         Vector2 mouseInput = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        
+
         if (areaLeft.Contains(mouseInput))
         {
             float speedRateLeft = ((areaLeft.width - mouseInput.x)/areaLeft.width);
