@@ -7,7 +7,6 @@ public class AIOTestCircle : MonoBehaviour {
     Rect deadAreaCircle;
     public Texture texture;
 
-    public float scaleFactor;
     public float rotationSpeed = 10.0f;
 
     Vector3 rotation;
@@ -30,7 +29,7 @@ public class AIOTestCircle : MonoBehaviour {
         if (distance > (deadAreaCircle.width/2))
         {
             Vector3 direction = new Vector3(mouseInput.x - activeMid.x, mouseInput.y - activeMid.y, 0);
-            Debug.Log(rotation + (direction * rotationSpeed * (distance/activeAreaCircle.width) * Time.deltaTime));
+            Debug.Log(direction.normalized);
         }
         if (distance > (activeAreaCircle.width/2))
         {

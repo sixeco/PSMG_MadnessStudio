@@ -4,7 +4,7 @@ using iViewX;
 
 public class CameraRotation : MonoBehaviour {
 
-    public Texture cursor;
+    //public Texture cursor;
 
     public float mouseSensitivity = 3.0f;
     public float upDownRange = 70.0f;

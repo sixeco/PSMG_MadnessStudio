@@ -11,14 +11,23 @@ public class AOITestRects : MonoBehaviour {
     Rect areaBottom; 
     public Texture border;
 
+    public bool isActive;
+
     public float scaleFactor;
     float maxRange;
 
-    public float rotationSpeed = 10.0f;
+    public bool visible;
+
+    public float rotationSpeed = 20.0f;
+    public float upDownRange = 70.0f;
+    public float leftRightRange = 70.0f;
     Vector3 rotation;
 
 	// Use this for initialization
 	void Start () {
+        isActive = this.GetComponent<TurretActivation>().isActive;
+        visible = this.GetComponent<TurretActivation>().AOIVisibility;
+
         maxRange = (Screen.height / 4) * 2;
         float scaleHeight = (Screen.height/4) + (maxRange * scaleFactor);
         float scaleWidth = scaleHeight * ((Screen.width* 1.05f) / Screen.height);
@@ -35,38 +44,47 @@ public class AOITestRects : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        isActive = this.GetComponent<TurretActivation>().isActive;
+        visible = this.GetComponent<TurretActivation>().AOIVisibility;
         Vector2 gazeInput = gazeModel.posGazeLeft + gazeModel.posGazeRight;
         Vector2 mouseInput = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 
-        if (areaLeft.Contains(mouseInput))
+        if (isActive)
         {
-            float speedRateLeft = ((areaLeft.width - mouseInput.x)/areaLeft.width);
-            rotation.y -= rotationSpeed * speedRateLeft * Time.deltaTime;
+            if (areaLeft.Contains(mouseInput))
+            {
+                float speedRateLeft = ((areaLeft.width - mouseInput.x) / areaLeft.width);
+                rotation.y -= rotationSpeed * speedRateLeft * Time.deltaTime;
+            }
+            if (areaRight.Contains(mouseInput))
+            {
+                float speedRateRight = ((areaRight.width - (Screen.width - mouseInput.x)) / areaRight.width);
+                rotation.y += rotationSpeed * speedRateRight * Time.deltaTime;
+            }
+            if (areaTop.Contains(mouseInput))
+            {
+                float speedRateTop = (areaTop.height - mouseInput.y) / areaTop.height;
+                rotation.x += rotationSpeed * speedRateTop * Time.deltaTime;
+                rotation.x = Mathf.Clamp(rotation.x, -upDownRange, upDownRange);
+            }
+            if (areaBottom.Contains(mouseInput))
+            {
+                float speedRateBottom = (areaBottom.height - (Screen.height - mouseInput.y)) / areaBottom.height;
+                rotation.x -= rotationSpeed * speedRateBottom * Time.deltaTime;
+            }
+            gameObject.transform.localRotation = Quaternion.Euler(rotation);
         }
-        if (areaRight.Contains(mouseInput))
-        {
-            float speedRateRight = ((areaRight.width - (Screen.width - mouseInput.x))/areaRight.width);
-            rotation.y += rotationSpeed * speedRateRight * Time.deltaTime;
-        }
-        if (areaTop.Contains(mouseInput))
-        {
-            float speedRateTop = (areaTop.height - mouseInput.y) / areaTop.height;
-            rotation.x += rotationSpeed * speedRateTop * Time.deltaTime;
-        }
-        if (areaBottom.Contains(mouseInput))
-        {
-            float speedRateBottom = (areaBottom.height - (Screen.height - mouseInput.y)) / areaBottom.height;
-            rotation.x -= rotationSpeed * speedRateBottom * Time.deltaTime;
-        }
-        gameObject.transform.localRotation = Quaternion.Euler(rotation);
 	}
 
     void OnGUI()
     {
-        //GUI.DrawTexture(scaleArea, border);
-        GUI.DrawTexture(areaLeft, border);
-        GUI.DrawTexture(areaRight, border);
-        GUI.DrawTexture(areaTop, border);
-        GUI.DrawTexture(areaBottom, border);
+        if (isActive && visible)
+        {
+            //GUI.DrawTexture(scaleArea, border);
+            GUI.DrawTexture(areaLeft, border);
+            GUI.DrawTexture(areaRight, border);
+            GUI.DrawTexture(areaTop, border);
+            GUI.DrawTexture(areaBottom, border);
+        }
     }
 }

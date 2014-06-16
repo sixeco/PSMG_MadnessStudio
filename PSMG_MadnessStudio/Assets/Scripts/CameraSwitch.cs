@@ -15,28 +15,28 @@ public class CameraSwitch : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             setActivation(turrets[0], true);
             setActivation(turrets[1], false);
             setActivation(turrets[2], false);
             setActivation(turrets[3], false);
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             setActivation(turrets[0], false);
             setActivation(turrets[1], true);
             setActivation(turrets[2], false);
             setActivation(turrets[3], false);
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             setActivation(turrets[0], false);
             setActivation(turrets[1], false);
             setActivation(turrets[2], true);
             setActivation(turrets[3], false);
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             setActivation(turrets[0], false);
             setActivation(turrets[1], false);

@@ -30,7 +30,8 @@ public class RocketShooter : MonoBehaviour {
             if (Input.GetKey(KeyCode.Mouse1) && coolDownRemain <= 0)
             {
                 coolDownRemain = coolDownRocket;
-                Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+                //Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 200f))
                 {

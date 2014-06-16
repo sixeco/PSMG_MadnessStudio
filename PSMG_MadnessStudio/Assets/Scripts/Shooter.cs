@@ -47,7 +47,8 @@ public class Shooter : MonoBehaviour {
         {
             if (Input.GetButton("Fire1") && coolDownRemain <= 0)
             {
-                Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+                //Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hitInfo;
 
                 if (Physics.Raycast(ray, out hitInfo, range))
@@ -92,7 +93,7 @@ public class Shooter : MonoBehaviour {
                     audio.Play();
                 }
             }
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.J))
             {
                 shotMode = !shotMode;
             }
