@@ -11,6 +11,9 @@ public class AOITestRects : MonoBehaviour {
     Rect areaBottom; 
     public Texture border;
 
+    public bool gazeInputActive = false;
+    private Vector2 mainInput;
+
     public bool isActive;
 
     public float scaleFactor;
@@ -27,6 +30,18 @@ public class AOITestRects : MonoBehaviour {
 	void Start () {
         isActive = this.GetComponent<TurretActivation>().isActive;
         visible = this.GetComponent<TurretActivation>().AOIVisibility;
+        gazeInputActive = this.GetComponent<GeneralStats>().gazeInputActive;
+
+        Vector2 gazeInput = gazeModel.posGazeLeft + gazeModel.posGazeRight;
+        Vector2 mouseInput = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        if (gazeInputActive)
+        {
+            mainInput = gazeInput;
+        }
+        else
+        {
+            mainInput = mouseInput;
+        }
 
         maxRange = (Screen.height / 4) * 2;
         float scaleHeight = (Screen.height/4) + (maxRange * scaleFactor);
@@ -48,28 +63,36 @@ public class AOITestRects : MonoBehaviour {
         visible = this.GetComponent<TurretActivation>().AOIVisibility;
         Vector2 gazeInput = gazeModel.posGazeLeft + gazeModel.posGazeRight;
         Vector2 mouseInput = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        if (gazeInputActive)
+        {
+            mainInput = gazeInput;
+        }
+        else
+        {
+            mainInput = mouseInput;
+        }
 
         if (isActive)
         {
-            if (areaLeft.Contains(mouseInput))
+            if (areaLeft.Contains(mainInput))
             {
-                float speedRateLeft = ((areaLeft.width - mouseInput.x) / areaLeft.width);
+                float speedRateLeft = ((areaLeft.width - mainInput.x) / areaLeft.width);
                 rotation.y -= rotationSpeed * speedRateLeft * Time.deltaTime;
             }
-            if (areaRight.Contains(mouseInput))
+            if (areaRight.Contains(mainInput))
             {
-                float speedRateRight = ((areaRight.width - (Screen.width - mouseInput.x)) / areaRight.width);
+                float speedRateRight = ((areaRight.width - (Screen.width - mainInput.x)) / areaRight.width);
                 rotation.y += rotationSpeed * speedRateRight * Time.deltaTime;
             }
-            if (areaTop.Contains(mouseInput))
+            if (areaTop.Contains(mainInput))
             {
-                float speedRateTop = (areaTop.height - mouseInput.y) / areaTop.height;
+                float speedRateTop = (areaTop.height - mainInput.y) / areaTop.height;
                 rotation.x += rotationSpeed * speedRateTop * Time.deltaTime;
                 rotation.x = Mathf.Clamp(rotation.x, -upDownRange, upDownRange);
             }
-            if (areaBottom.Contains(mouseInput))
+            if (areaBottom.Contains(mainInput))
             {
-                float speedRateBottom = (areaBottom.height - (Screen.height - mouseInput.y)) / areaBottom.height;
+                float speedRateBottom = (areaBottom.height - (Screen.height - mainInput.y)) / areaBottom.height;
                 rotation.x -= rotationSpeed * speedRateBottom * Time.deltaTime;
             }
             gameObject.transform.localRotation = Quaternion.Euler(rotation);
