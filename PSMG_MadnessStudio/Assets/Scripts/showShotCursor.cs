@@ -5,7 +5,7 @@ public class showShotCursor : MonoBehaviour {
 
     public static bool cursorOff = false;
 
-    bool isActive;
+    public bool isActive;
     public Texture crosshairTexture;
     private Rect textureRect;
 

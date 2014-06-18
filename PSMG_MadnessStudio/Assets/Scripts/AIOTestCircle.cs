@@ -21,7 +21,7 @@ public class AIOTestCircle : MonoBehaviour {
 	}
 	
 	void Update () {
-        Vector2 gazeInput = gazeModel.posGazeLeft + gazeModel.posGazeRight;
+        //Vector2 gazeInput = gazeModel.posGazeLeft + gazeModel.posGazeRight;
         Vector2 mouseInput = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         Vector2 activeMid = new Vector2(activeAreaCircle.x + ((activeAreaCircle.width)/2), activeAreaCircle.y + ((activeAreaCircle.height)/2));
         float distance = Vector2.Distance(activeMid, mouseInput);

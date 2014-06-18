@@ -11,7 +11,7 @@ public class AOITestRects : MonoBehaviour {
     Rect areaBottom; 
     public Texture border;
 
-    public bool gazeInputActive = false;
+    bool isGazeInputActive;
     private Vector2 mainInput;
 
     public bool isActive;
@@ -30,11 +30,12 @@ public class AOITestRects : MonoBehaviour {
 	void Start () {
         isActive = this.GetComponent<TurretActivation>().isActive;
         visible = this.GetComponent<TurretActivation>().AOIVisibility;
-        gazeInputActive = this.GetComponent<GeneralStats>().gazeInputActive;
+        isGazeInputActive = this.GetComponent<TurretActivation>().isGazeInputActive;
+
 
         Vector2 gazeInput = gazeModel.posGazeLeft + gazeModel.posGazeRight;
         Vector2 mouseInput = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        if (gazeInputActive)
+        if (isGazeInputActive)
         {
             mainInput = gazeInput;
         }
@@ -63,7 +64,7 @@ public class AOITestRects : MonoBehaviour {
         visible = this.GetComponent<TurretActivation>().AOIVisibility;
         Vector2 gazeInput = gazeModel.posGazeLeft + gazeModel.posGazeRight;
         Vector2 mouseInput = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        if (gazeInputActive)
+        if (isGazeInputActive)
         {
             mainInput = gazeInput;
         }
