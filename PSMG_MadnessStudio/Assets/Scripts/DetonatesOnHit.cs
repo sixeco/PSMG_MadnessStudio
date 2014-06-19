@@ -10,6 +10,8 @@ public class DetonatesOnHit : MonoBehaviour {
     public float explosionRadius = 5;
     public float explosionAnchor = 1;
 
+    public float objectDamage = 10f;
+
     //public float damage = 200f; //Damage at center of explosion
     //public float explosionRadius = 3f;
 
@@ -57,13 +59,12 @@ public class DetonatesOnHit : MonoBehaviour {
             c.rigidbody.AddExplosionForce(explosionForce, explosionPoint, explosionRadius, explosionAnchor, ForceMode.Impulse);
             Destroy(gameObject);
 
-            /*
-            HasHealth h = c.GetComponent<HasHealth>();
+            HP h = c.GetComponent<HP>();
             if(h != null){
-                float distance = Vector3.Distance(explosionPoint, c.transform.position);
-                float damageRatio = 1f - (distance / explosionRadius);
-                h.RecieveDamage(damage * damageRatio);
-            }*/
+                //float distance = Vector3.Distance(explosionPoint, c.transform.position);
+                //float damageRatio = 1f - (distance / explosionRadius);
+                h.AddDamage(objectDamage);
+            }
         }
         
     }
