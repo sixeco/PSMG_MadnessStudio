@@ -3,15 +3,14 @@ using System.Collections;
 
 public class TwinCannon : MonoBehaviour {
 
-    public Transform shotPosLeft;
-    public Transform shotPosRight;
+    public Transform cannonShotPos;
+    public Transform laserShotPos;
 
-    bool shotMode;
-    bool turn;
+    public float CannonShotForce;
 
-    public float shotForce;
-
-    public float range;
+    private float LaserCoolDown;
+    private float RocketCoolDown;
+    private float CannonCoolDown;
 
 	void Start () {
 	    
