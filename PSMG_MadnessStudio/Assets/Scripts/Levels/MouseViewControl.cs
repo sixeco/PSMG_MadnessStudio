@@ -12,6 +12,7 @@ public class MouseViewControl : MonoBehaviour {
     Texture crosshairTexture;
 
 	void Start () {
+        this.enabled = !this.transform.parent.gameObject.transform.parent.GetComponent<TurretStats>().isGazeInputActive;
         crosshairTexture = this.transform.parent.gameObject.transform.parent.GetComponent<TurretStats>().dataObject.GetComponent<TextureData>().crosshairMouse;
         Screen.lockCursor = true;
 	}

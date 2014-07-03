@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ModelData : MonoBehaviour {
 
-    public Rigidbody twinProjectile;
-    public Rigidbody rocketModel;
+    public Rigidbody CannonProjectile;
+    public Rigidbody RocketModel;
+    public GameObject LaserSpark;
 }
