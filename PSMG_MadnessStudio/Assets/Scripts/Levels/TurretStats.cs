@@ -7,8 +7,6 @@ public class TurretStats : MonoBehaviour {
     public bool isAOIcontrolActive = false;
     public bool isAOIvisible = false;
 
-    public GameObject dataObject;
-
     void Start()
     {
         if (isGazeInputActive)
@@ -20,20 +18,8 @@ public class TurretStats : MonoBehaviour {
             isGazeInputActive = false;
             isAOIvisible = false;
         }
-    }
-
-    private bool GetBoolData(string key)
-    {
-        switch (key)
-        {
-            case "isGazeInputActive":
-                return isGazeInputActive;
-            case "isAOIcontrolActive":
-                return isAOIcontrolActive;
-            case "isAOIvisible":
-                return isAOIvisible;
-            default:
-                return false;
-        }
+        ActivationDataStatic.isGazeInputActive = isGazeInputActive;
+        ActivationDataStatic.isAOIcontrolActive = isAOIcontrolActive;
+        ActivationDataStatic.isAOIvisible = isAOIvisible;
     }
 }

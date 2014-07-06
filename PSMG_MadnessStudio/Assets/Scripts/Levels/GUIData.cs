@@ -4,14 +4,11 @@ using System.Collections;
 public class GUIData : MonoBehaviour {
     
     public float AoiScaleFactor;
+    public float MouseSensitivity;
 
-    void OnEnable()
+    void Start()
     {
-        AOIControls4Panel.GetScaleFactor += GetFactor; 
-    }
-
-    private float GetFactor()
-    {
-        return AoiScaleFactor;
+        GUIDataStatic.AOIScaleFactor = AoiScaleFactor;
+        GUIDataStatic.MouseSensitivity = MouseSensitivity;
     }
 }

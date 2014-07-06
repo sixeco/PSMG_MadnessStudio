@@ -12,7 +12,7 @@ public class TwinCannon : MonoBehaviour {
 
     private GameObject spark;
 
-    private float CannonShotForce = 1000.0f;
+    //private float CannonShotForce = 1000.0f;
 
 	void Start () {
 	    

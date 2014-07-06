@@ -3,15 +3,6 @@ using System.Collections;
 
 public class AOIControls4Panel : MonoBehaviour {
 
-    public delegate bool EnabledScript();
-    public static event EnabledScript AOIScriptEnabled;
-
-    public delegate float FloatDataEvent();
-    public static event FloatDataEvent GetScaleFactor;
-
-    public delegate Texture TextureObjectEvent();
-    public static event TextureObjectEvent GetTexture;
-
     Rect scaleArea;
     Rect areaLeft;
     Rect areaRight;
@@ -27,11 +18,11 @@ public class AOIControls4Panel : MonoBehaviour {
     private float maxScale;
 
 	void Start () {
-        this.enabled = this.transform.parent.gameObject.transform.parent.GetComponent<TurretStats>().isAOIcontrolActive;
-        areAOIsVisible = this.transform.parent.gameObject.transform.parent.GetComponent<TurretStats>().isAOIvisible;
+        this.enabled = ActivationDataStatic.isAOIcontrolActive;
+        areAOIsVisible = ActivationDataStatic.isAOIvisible;
 
-        Filler = GetTexture();
-        aoiScaleFactor = GetScaleFactor();
+        Filler = TextureDataStatic.AOIFiller;
+        aoiScaleFactor = GUIDataStatic.AOIScaleFactor;
         
         maxScale = (Screen.height / 4) * 2;
         float scaleHeight = (Screen.height / 4) + (maxScale * aoiScaleFactor);

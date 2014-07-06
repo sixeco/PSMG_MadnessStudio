@@ -3,13 +3,6 @@ using System.Collections;
 
 public class MouseViewControl : MonoBehaviour {
 
-    public delegate float InputEvent();
-    public static event InputEvent YInput;
-    public static event InputEvent XInput;
-
-    public delegate Texture AssetEvent();
-    public static event AssetEvent CrossHairTexture;
-
     public float mouseSensitivity = 3.0f;
     public float upDownRange = 70.0f;
     public float leftRightRange = 70.0f;
@@ -19,16 +12,17 @@ public class MouseViewControl : MonoBehaviour {
     Texture crosshairTexture;
 
 	void Start () {
-        this.enabled = !this.transform.parent.gameObject.transform.parent.GetComponent<TurretStats>().isGazeInputActive;
-        crosshairTexture = CrossHairTexture();
+        this.enabled = !ActivationDataStatic.isGazeInputActive;
+        crosshairTexture = TextureDataStatic.CrosshairMouse;
+        //mouseSensitivity = GUIDataStatic.MouseSensitivity;
         Screen.lockCursor = true;
 	}
 	
 	void Update () {
-        horizontalRotation += XInput() * mouseSensitivity;
+        horizontalRotation += MousInputDataStatic.XAxis * mouseSensitivity;
         //horizontalRotation = Mathf.Clamp(horizontalRotation, -leftRightRange, leftRightRange);
 
-        verticalRotation -= YInput() * mouseSensitivity;
+        verticalRotation -= MousInputDataStatic.YAxis * mouseSensitivity;
         verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
 
         this.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);

@@ -15,13 +15,8 @@ public class TextureData : MonoBehaviour {
 
     void OnEnable()
     {
-        MouseViewControl.CrossHairTexture += GetCrosshairMouse;
-        AOIControls4Panel.GetTexture += GetAOIFiller;
-    }
-
-    void OnDisable()
-    {
-        MouseViewControl.CrossHairTexture += GetCrosshairMouse;
+        TextureDataStatic.CrosshairMouse = crosshairMouse;
+        TextureDataStatic.AOIFiller = aoiFiller;
     }
 
     Texture GetCrosshairMouse()
