@@ -18,6 +18,19 @@ public class TurretStats : MonoBehaviour {
             isGazeInputActive = false;
             isAOIvisible = false;
         }
+    }
+
+    void Update()
+    {
+        if (isGazeInputActive)
+        {
+            isAOIcontrolActive = true;
+        }
+        if (isAOIcontrolActive == false)
+        {
+            isGazeInputActive = false;
+            isAOIvisible = false;
+        }
         ActivationDataStatic.isGazeInputActive = isGazeInputActive;
         ActivationDataStatic.isAOIcontrolActive = isAOIcontrolActive;
         ActivationDataStatic.isAOIvisible = isAOIvisible;
