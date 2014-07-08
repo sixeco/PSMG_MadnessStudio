@@ -10,7 +10,6 @@ public class AOIControls4Panel : MonoBehaviour {
     Rect areaBottom;
     private Texture Filler;
 
-    private bool isGazeInputActive;
     private Vector2 mainInput;
     private bool areAOIsVisible;
 

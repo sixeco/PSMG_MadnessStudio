@@ -9,13 +9,16 @@ public class MouseViewControl : MonoBehaviour {
     float verticalRotation = 0.0f;
     float horizontalRotation = 0.0f;
 
-    Texture crosshairTexture;
-
 	void Start () {
-        this.enabled = !ActivationDataStatic.isGazeInputActive;
-        crosshairTexture = TextureDataStatic.CrosshairMouse;
-        //mouseSensitivity = GUIDataStatic.MouseSensitivity;
-        Screen.lockCursor = true;
+        if (ActivationDataStatic.isGazeInputActive || ActivationDataStatic.isAOIcontrolActive)
+        {
+            this.enabled = false;
+        }
+        else
+        {
+            this.enabled = true;
+        }
+        mouseSensitivity = GUIDataStatic.MouseSensitivity;
 	}
 	
 	void Update () {
@@ -27,9 +30,4 @@ public class MouseViewControl : MonoBehaviour {
 
         this.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
 	}
-
-    void OnGUI()
-    {
-        GUI.DrawTexture(new Rect((Screen.width/2 - crosshairTexture.width/2), (Screen.height/2 - crosshairTexture.height/2), crosshairTexture.width, crosshairTexture.height), crosshairTexture);
-    }
 }

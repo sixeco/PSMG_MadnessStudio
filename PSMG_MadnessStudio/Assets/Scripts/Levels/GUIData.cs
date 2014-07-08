@@ -6,7 +6,7 @@ public class GUIData : MonoBehaviour {
     public float AoiScaleFactor;
     public float MouseSensitivity;
 
-    void Start()
+    void Awake()
     {
         GUIDataStatic.AOIScaleFactor = AoiScaleFactor;
         GUIDataStatic.MouseSensitivity = MouseSensitivity;

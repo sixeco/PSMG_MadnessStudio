@@ -7,9 +7,10 @@ public class TextureData : MonoBehaviour {
     public Texture crosshairMouse;
     public Texture crosshairGaze;
 
-    void OnEnable()
+    void Awake()
     {
         TextureDataStatic.CrosshairMouse = crosshairMouse;
+        TextureDataStatic.CrosshairGaze = crosshairGaze;
         TextureDataStatic.AOIFiller = aoiFiller;
     }
 }
