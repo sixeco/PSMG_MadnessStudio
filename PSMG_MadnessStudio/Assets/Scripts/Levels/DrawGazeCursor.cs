@@ -17,9 +17,8 @@ public class DrawGazeCursor : MonoBehaviour {
     void Update()
     {
         Vector2 GPos = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
-        gazeRect.x = GPos.x;
-        gazeRect.y = GPos.y;
-        print("Gaze: X/" + gazeRect.x.ToString() + " Y/" + gazeRect.y.ToString());
+        gazeRect.x = GPos.x - (gazeCursor.width/2);
+        gazeRect.y = GPos.y - (gazeCursor.height/2);
     }
 
     void OnGUI()

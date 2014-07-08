@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using iViewX;
 
 public class AOIControls4Panel : MonoBehaviour {
 
@@ -16,9 +17,17 @@ public class AOIControls4Panel : MonoBehaviour {
     private float aoiScaleFactor;
     private float maxScale;
 
+    private bool isGazeInputActive;
+
+    private float rotationSpeed;
+
+    Vector3 rotation;
+
 	void Start () {
         this.enabled = ActivationDataStatic.isAOIcontrolActive;
         areAOIsVisible = ActivationDataStatic.isAOIvisible;
+
+        isGazeInputActive = ActivationDataStatic.isGazeInputActive;
 
         Filler = TextureDataStatic.AOIFiller;
         aoiScaleFactor = GUIDataStatic.AOIScaleFactor;
@@ -33,10 +42,52 @@ public class AOIControls4Panel : MonoBehaviour {
 
         areaTop = new Rect(0, 0, Screen.width, ((Screen.height - scaleArea.height) / 2));
         areaBottom = new Rect(0, (Screen.height - ((Screen.height - scaleArea.height) / 2)), Screen.width, ((Screen.height - scaleArea.height) / 2));
+
+        rotationSpeed = GUIDataStatic.GazeSensitivity;
+
+        rotation = new Vector3(0, 0, 0);
     }
 	
 	void Update () {
-	    
+        if (isGazeInputActive)
+        {
+            mainInput = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
+            mainInput.y = Screen.height - mainInput.y;
+        }
+        else
+        {
+            mainInput = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        }
+        if (areaLeft.Contains(mainInput))
+        {
+            float speedRate = ((areaLeft.width - mainInput.x) / areaLeft.width);
+            rotation.y -= rotationSpeed * speedRate * Time.deltaTime;
+        }
+        if (areaRight.Contains(mainInput))
+        {
+            float speedRate = ((areaRight.width - (Screen.width - mainInput.x)) / areaRight.width);
+            rotation.y += rotationSpeed * speedRate * Time.deltaTime;
+        }
+        if (areaTop.Contains(mainInput))
+        {
+            float speedRate = (areaTop.height - mainInput.y) / areaTop.height;
+            rotation.x += rotationSpeed * speedRate * Time.deltaTime;
+            if (rotation.x < -70.0f)
+            {
+                rotation.x = -70.0f;
+            }
+        }
+        if (areaBottom.Contains(mainInput))
+        {
+            float speedRate = (areaBottom.height - (Screen.height - mainInput.y)) / areaBottom.height;
+            rotation.x -= rotationSpeed * speedRate * Time.deltaTime;
+            if (rotation.x > 60.0f)
+            {
+                rotation.x = 60.0f;
+            }
+        }
+        print(rotation.x);
+        gameObject.transform.localRotation = Quaternion.Euler(rotation);
 	}
 
     void OnGUI()
