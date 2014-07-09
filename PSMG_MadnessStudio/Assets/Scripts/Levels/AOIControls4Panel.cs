@@ -86,7 +86,6 @@ public class AOIControls4Panel : MonoBehaviour {
                 rotation.x = 60.0f;
             }
         }
-        print(rotation.x);
         gameObject.transform.localRotation = Quaternion.Euler(rotation);
 	}
 
