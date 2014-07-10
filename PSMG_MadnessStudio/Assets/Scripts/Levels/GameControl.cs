@@ -5,9 +5,6 @@ public class GameControl : MonoBehaviour {
 
     public static GameControl control;
 
-    public float health;
-    public float exp;
-
 	void Awake () {
         if (control == null)
         {
@@ -19,10 +16,4 @@ public class GameControl : MonoBehaviour {
             Destroy(gameObject);
         }
 	}
-
-    void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 100, 30), "health: " + health);
-        GUI.Label(new Rect(10, 40, 100, 30), "exp: " + exp);
-    }
 }
