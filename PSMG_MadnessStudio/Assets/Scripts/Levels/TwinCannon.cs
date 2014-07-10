@@ -49,11 +49,11 @@ public class TwinCannon : MonoBehaviour {
         CannonCoolDown = CoolDownDataStatic.CannonCoolDown;
         LaserCoolDown = CoolDownDataStatic.LaserCoolDown;
         shotForce = DamageDataStatic.CannonForce;
+        laserForce = DamageDataStatic.LaserForce;
 	}
 	
 	void Update () {
         CoolDownRemain -= Time.deltaTime;
-        print(CoolDownRemain);
 	}
 
     void Shot()
@@ -83,7 +83,29 @@ public class TwinCannon : MonoBehaviour {
                     }
 
                     CoolDownRemain = CannonCoolDown;
+                    //Audio stuff here
                 }
+                else
+                {
+                    CoolDownRemain = LaserCoolDown;
+                    Vector3 hitPoint = hitInfo.point;
+                    GameObject LaserCollision = hitInfo.collider.gameObject;
+                    if (LaserCollision.collider != null)
+                    {
+                        GameObject temp = spark;
+                        if (LaserCollision.rigidbody != null)
+                        {
+                            LaserCollision.rigidbody.AddForceAtPosition((LaserCollision.transform.position - hitPoint) * laserForce, hitPoint, ForceMode.Impulse);
+                            Instantiate(temp, hitPoint, LaserCollision.rigidbody.rotation);
+                        }
+                        else
+                        {
+                            Instantiate(temp, hitPoint, LaserCollision.gameObject.transform.localRotation);
+                        }
+                    }
+                    //Audio stuff here
+                }
+                //audio.Play();
             }
         }
     }
