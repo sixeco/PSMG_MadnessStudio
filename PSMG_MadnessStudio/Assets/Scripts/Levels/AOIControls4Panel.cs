@@ -72,18 +72,18 @@ public class AOIControls4Panel : MonoBehaviour {
         {
             float speedRate = (areaTop.height - mainInput.y) / areaTop.height;
             rotation.x += rotationSpeed * speedRate * Time.deltaTime;
-            if (rotation.x < -70.0f)
+            if (rotation.x > 20.0f)
             {
-                rotation.x = -70.0f;
-            }
+                rotation.x = 20.0f;
+            }            
         }
         if (areaBottom.Contains(mainInput))
         {
             float speedRate = (areaBottom.height - (Screen.height - mainInput.y)) / areaBottom.height;
             rotation.x -= rotationSpeed * speedRate * Time.deltaTime;
-            if (rotation.x > 60.0f)
+            if (rotation.x < -20.0f)
             {
-                rotation.x = 60.0f;
+                rotation.x = -20.0f;
             }
         }
         gameObject.transform.localRotation = Quaternion.Euler(rotation);
