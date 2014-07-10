@@ -23,6 +23,13 @@ public class MouseInput : MonoBehaviour {
 
     Vector3 GetMouseInput()
     {
-        return Input.mousePosition;
+        if (ActivationDataStatic.isAOIcontrolActive)
+        {
+            return Input.mousePosition;
+        }
+        else
+        {
+            return new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        }
     }
 }
