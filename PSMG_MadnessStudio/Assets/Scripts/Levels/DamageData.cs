@@ -10,6 +10,8 @@ public class DamageData : MonoBehaviour {
     public float LaserForce;
     public float CannonForce;
 
+    public float AIProjSpeed;
+
     void Awake()
     {
         DamageDataStatic.LaserDamage = LaserDamage;
@@ -18,5 +20,6 @@ public class DamageData : MonoBehaviour {
 
         DamageDataStatic.LaserForce = LaserForce;
         DamageDataStatic.CannonForce = CannonForce;
+        DamageDataStatic.AIProjSpeed = AIProjSpeed;
     }
 }

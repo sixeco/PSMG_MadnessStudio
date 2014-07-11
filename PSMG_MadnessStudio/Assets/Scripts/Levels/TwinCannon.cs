@@ -25,7 +25,10 @@ public class TwinCannon : MonoBehaviour {
 
     private float shotForce;
 
-    private float RayCheckRange = 100.0f;
+    public AudioClip[] smokeShotSounds;
+    public AudioClip[] laserShotSounds;
+
+    private float RayCheckRange = 300.0f;
 
     void OnEnable()
     {
@@ -83,7 +86,8 @@ public class TwinCannon : MonoBehaviour {
                     }
 
                     CoolDownRemain = CannonCoolDown;
-                    //Audio stuff here
+                    int shotIndex = Random.Range(0, 3);
+                    audio.clip = smokeShotSounds[shotIndex]; 
                 }
                 else
                 {
@@ -103,9 +107,10 @@ public class TwinCannon : MonoBehaviour {
                             Instantiate(temp, hitPoint, LaserCollision.gameObject.transform.localRotation);
                         }
                     }
-                    //Audio stuff here
+                    int shotIndex = Random.Range(0, 3);
+                    audio.clip = laserShotSounds[shotIndex];
                 }
-                //audio.Play();
+                audio.Play();
             }
         }
     }

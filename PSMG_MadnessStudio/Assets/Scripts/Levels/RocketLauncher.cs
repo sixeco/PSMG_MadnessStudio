@@ -12,6 +12,8 @@ public class RocketLauncher : MonoBehaviour {
     private GameObject RocketObject;
     public Transform RocketLauncherShotPos;
 
+    public AudioClip rocketSound;
+
     void OnEnable()
     {
         KeyControls.RocketLaunch += ShootRocket;
@@ -43,6 +45,8 @@ public class RocketLauncher : MonoBehaviour {
             {
                 Quaternion rotation = Quaternion.LookRotation((hit.point - (RocketLauncherShotPos.transform.position + RocketLauncherShotPos.transform.forward)).normalized);
                 Instantiate(RocketObject, RocketLauncherShotPos.transform.position + RocketLauncherShotPos.transform.forward, rotation);
+                audio.clip = rocketSound;
+                audio.Play();
             }
         }
     }

@@ -42,6 +42,6 @@ public class DrawGazeCursor : MonoBehaviour {
 
     Vector3 GetGazeInput()
     {
-        return new Vector3(GPos.x, GPos.y, 0);
+        return new Vector3(GPos.x, Screen.height - GPos.y, 0);
     }
 }

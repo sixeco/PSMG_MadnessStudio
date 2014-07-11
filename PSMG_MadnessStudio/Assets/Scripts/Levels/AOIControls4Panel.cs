@@ -72,7 +72,7 @@ public class AOIControls4Panel : MonoBehaviour {
         {
             float speedRate = (areaTop.height - mainInput.y) / areaTop.height;
             rotation.x += rotationSpeed * speedRate * Time.deltaTime;
-            if (rotation.x > 20.0f)
+            if (rotation.x > 70.0f)
             {
                 rotation.x = 20.0f;
             }            
@@ -81,7 +81,7 @@ public class AOIControls4Panel : MonoBehaviour {
         {
             float speedRate = (areaBottom.height - (Screen.height - mainInput.y)) / areaBottom.height;
             rotation.x -= rotationSpeed * speedRate * Time.deltaTime;
-            if (rotation.x < -20.0f)
+            if (rotation.x < -50.0f)
             {
                 rotation.x = -20.0f;
             }

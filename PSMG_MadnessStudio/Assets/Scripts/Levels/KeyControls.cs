@@ -7,19 +7,29 @@ public class KeyControls : MonoBehaviour {
     public static event ShootAction RocketLaunch;
     public static event ShootAction CannonShot;
     public static event ShootAction ChangeShotMode;
-
-	void Start () {
-	
-	}
     
 	void Update () {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (!ActivationDataStatic.isGazeInputActive)
         {
-            CannonShot();
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                CannonShot();
+            }
+            if (Input.GetKey(KeyCode.Mouse1))
+            {
+                RocketLaunch();
+            }
         }
-        if (Input.GetKey(KeyCode.Mouse1))
+        else
         {
-            RocketLaunch();
+            if (Input.GetKey(KeyCode.J))
+            {
+                RocketLaunch();
+            } 
+            if (Input.GetKey(KeyCode.K))
+            {
+                CannonShot();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
