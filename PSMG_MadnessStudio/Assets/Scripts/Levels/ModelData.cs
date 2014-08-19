@@ -8,13 +8,4 @@ public class ModelData : MonoBehaviour {
     public GameObject LaserSpark;
     public GameObject Lab;
     public GameObject AIExplosion;
-
-    void Awake()
-    {
-        ModelDataStatic.CannonProjectile = CannonProjectile;
-        ModelDataStatic.RocketModel = RocketModel;
-        ModelDataStatic.LaserSpark = LaserSpark;
-        ModelDataStatic.Lab = Lab;
-        ModelDataStatic.AIExplosion = AIExplosion;
-    }
 }

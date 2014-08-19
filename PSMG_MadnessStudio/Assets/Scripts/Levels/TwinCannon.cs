@@ -46,13 +46,17 @@ public class TwinCannon : MonoBehaviour {
         CoolDownRemain = 0;
         shotMode = true;
 
-        spark = ModelDataStatic.LaserSpark;
-        CannonProjectile = ModelDataStatic.CannonProjectile;
+        ModelData modelData = GameObject.Find("Data").GetComponent<ModelData>();
+        CoolDownValues cools = GameObject.Find("Data").GetComponent<CoolDownValues>();
+        DamageData DD = GameObject.Find("Data").GetComponent<DamageData>();
 
-        CannonCoolDown = CoolDownDataStatic.CannonCoolDown;
-        LaserCoolDown = CoolDownDataStatic.LaserCoolDown;
-        shotForce = DamageDataStatic.CannonForce;
-        laserForce = DamageDataStatic.LaserForce;
+        spark = modelData.LaserSpark;
+        CannonProjectile = modelData.CannonProjectile;
+
+        CannonCoolDown = cools.Cannon;
+        LaserCoolDown = cools.LaserMain;
+        shotForce = DD.CannonForce;
+        laserForce = DD.LaserForce;
 	}
 	
 	void Update () {

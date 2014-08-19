@@ -3,6 +3,9 @@ using System.Collections;
 
 public class MouseInput : MonoBehaviour {
 
+    public float XAxis;
+    public float YAxis;
+
     void OnEnable()
     {
         TwinCannon.MainInput += GetMouseInput;
@@ -17,13 +20,13 @@ public class MouseInput : MonoBehaviour {
 
     void Update()
     {
-        MousInputDataStatic.XAxis = Input.GetAxis("Mouse X");
-        MousInputDataStatic.YAxis = Input.GetAxis("Mouse Y");
+        XAxis = Input.GetAxis("Mouse X");
+        YAxis = Input.GetAxis("Mouse Y");
     }
 
     Vector3 GetMouseInput()
     {
-        if (ActivationDataStatic.isAOIcontrolActive)
+        if (GameObject.Find("Turret Manager").GetComponent<TurretStats>().isAOIcontrolActive)
         {
             return Input.mousePosition;
         }

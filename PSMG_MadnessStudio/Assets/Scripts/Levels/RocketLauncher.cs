@@ -26,8 +26,8 @@ public class RocketLauncher : MonoBehaviour {
 
 	void Start () {
         CoolDownRemain = 0;
-        CoolDownRocket = CoolDownDataStatic.RocketCoolDown;
-        RocketObject = ModelDataStatic.RocketModel;
+        CoolDownRocket = GameObject.Find("Data").GetComponent<CoolDownValues>().RocketMain;
+        RocketObject = GameObject.Find("Data").GetComponent<ModelData>().RocketModel;
 	}
 	
 	void Update () {

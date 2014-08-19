@@ -22,8 +22,8 @@ public class DrawGazeCursor : MonoBehaviour {
 
     void Start()
     {
-        this.enabled = ActivationDataStatic.isGazeInputActive;
-        gazeCursor = TextureDataStatic.CrosshairGaze;
+        this.enabled = GameObject.Find("Turret Manager").GetComponent<TurretStats>().isGazeInputActive;
+        gazeCursor = GameObject.Find("Data").GetComponent<TextureData>().crosshairGaze;
         GPos = Vector2.zero;
         gazeRect = new Rect(0, 0, gazeCursor.width, gazeCursor.height);
     }

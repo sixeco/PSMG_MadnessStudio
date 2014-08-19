@@ -9,9 +9,9 @@ public class DrawMouseCursor : MonoBehaviour {
 
     void Start()
     {
-        this.enabled = !ActivationDataStatic.isGazeInputActive;
-        crosshairMouse = TextureDataStatic.CrosshairMouse;
-        isAOIActive = ActivationDataStatic.isAOIcontrolActive;
+        this.enabled = !GameObject.Find("Turret Manager").GetComponent<TurretStats>().isGazeInputActive;
+        crosshairMouse = GameObject.Find("Data").GetComponent<TextureData>().crosshairMouse;
+        isAOIActive = GameObject.Find("Turret Manager").GetComponent<TurretStats>().isAOIcontrolActive;
         textureRect = new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, crosshairMouse.width, crosshairMouse.height);
     }
 

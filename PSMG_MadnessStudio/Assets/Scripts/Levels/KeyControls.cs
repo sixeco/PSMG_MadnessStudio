@@ -9,7 +9,7 @@ public class KeyControls : MonoBehaviour {
     public static event ShootAction ChangeShotMode;
     
 	void Update () {
-        if (!ActivationDataStatic.isGazeInputActive)
+        if (!GameObject.Find("Turret Manager").GetComponent<TurretStats>().isGazeInputActive)
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {

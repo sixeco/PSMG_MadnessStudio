@@ -9,8 +9,12 @@ public class MouseViewControl : MonoBehaviour {
     float verticalRotation = 0.0f;
     float horizontalRotation = 0.0f;
 
+    GUIData guiData;
+
 	void Start () {
-        if (ActivationDataStatic.isGazeInputActive || ActivationDataStatic.isAOIcontrolActive)
+        TurretStats stats = GameObject.Find("Turret Manager").GetComponent<TurretStats>();
+        //guiData = GameObject.Find("Data").GetComponent<GUIData>().
+        if (stats.isGazeInputActive || stats.isAOIcontrolActive)
         {
             this.enabled = false;
         }
@@ -18,14 +22,14 @@ public class MouseViewControl : MonoBehaviour {
         {
             this.enabled = true;
         }
-        mouseSensitivity = GUIDataStatic.MouseSensitivity;
+        mouseSensitivity = GameObject.Find("Data").GetComponent<GUIData>().MouseSensitivity;
 	}
 	
 	void Update () {
-        horizontalRotation += MousInputDataStatic.XAxis * mouseSensitivity;
+        //horizontalRotation += MousInputDataStatic.XAxis * mouseSensitivity;
         //horizontalRotation = Mathf.Clamp(horizontalRotation, -leftRightRange, leftRightRange);
 
-        verticalRotation -= MousInputDataStatic.YAxis * mouseSensitivity;
+        //verticalRotation -= MousInputDataStatic.YAxis * mouseSensitivity;
         verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
 
         this.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
