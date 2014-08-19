@@ -24,13 +24,13 @@ public class AOIControls4Panel : MonoBehaviour {
     Vector3 rotation;
 
 	void Start () {
-        this.enabled = ActivationDataStatic.isAOIcontrolActive;
-        areAOIsVisible = ActivationDataStatic.isAOIvisible;
+        this.enabled = GameObject.Find("Turret Manager").GetComponent<TurretStats>().isAOIcontrolActive;
+        areAOIsVisible = GameObject.Find("Turret Manager").GetComponent<TurretStats>().isAOIvisible;
 
-        isGazeInputActive = ActivationDataStatic.isGazeInputActive;
+        isGazeInputActive = GameObject.Find("Turret Manager").GetComponent<TurretStats>().isGazeInputActive;
 
-        Filler = TextureDataStatic.AOIFiller;
-        aoiScaleFactor = GUIDataStatic.AOIScaleFactor;
+        Filler = GameObject.Find("Data").GetComponent<TextureData>().aoiFiller;
+        aoiScaleFactor = GameObject.Find("Data").GetComponent<GUIData>().AoiScaleFactor;
         
         maxScale = (Screen.height / 4) * 2;
         float scaleHeight = (Screen.height / 4) + (maxScale * aoiScaleFactor);
@@ -43,7 +43,7 @@ public class AOIControls4Panel : MonoBehaviour {
         areaTop = new Rect(0, 0, Screen.width, ((Screen.height - scaleArea.height) / 2));
         areaBottom = new Rect(0, (Screen.height - ((Screen.height - scaleArea.height) / 2)), Screen.width, ((Screen.height - scaleArea.height) / 2));
 
-        rotationSpeed = GUIDataStatic.GazeSensitivity;
+        rotationSpeed = GameObject.Find("Data").GetComponent<GUIData>().GazeSensitivity;
 
         rotation = new Vector3(0, 0, 0);
     }

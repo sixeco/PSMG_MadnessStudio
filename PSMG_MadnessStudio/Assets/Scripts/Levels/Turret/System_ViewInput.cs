@@ -6,8 +6,10 @@ public class System_ViewInput : MonoBehaviour {
 
     public delegate void MouseInputEvent(float xAxis, float yAxis);
     public delegate void GazeInputEvent(Vector2 vector);
+
     public static event MouseInputEvent Mouse;
-    public static event GazeInputEvent Gaze;
+    public static event GazeInputEvent GazeCursor;
+    public static event GazeInputEvent GazeOnly;
 
     bool GazeAndMouse;
     bool GazeAndAOI;
@@ -23,11 +25,11 @@ public class System_ViewInput : MonoBehaviour {
         if (GazeAndMouse)
         {
             Mouse(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-            Gaze((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
+            GazeCursor((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
         }
         else if (GazeAndAOI)
         {
-            Gaze((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
+            GazeOnly((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
         }
         else if (MouseOnly)
         {

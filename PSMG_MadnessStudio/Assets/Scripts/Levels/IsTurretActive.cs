@@ -15,7 +15,7 @@ public class IsTurretActive : MonoBehaviour {
         }
         else
         {
-            if (ActivationDataStatic.isGazeInputActive)
+            if (GameObject.Find("Turret Manager").GetComponent<TurretStats>().isGazeInputActive)
             {
                 this.GetComponent<MouseViewControl>().enabled = false;
                 this.GetComponent<DrawMouseCursor>().enabled = false;

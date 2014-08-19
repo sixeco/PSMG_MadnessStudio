@@ -23,9 +23,9 @@ public class AIProjEngine : MonoBehaviour {
 
     void Start()
     {
-        speed = DamageDataStatic.AIProjSpeed;
-        lab = ModelDataStatic.Lab;
-        Explosion = ModelDataStatic.AIExplosion;
+        speed = GameObject.Find("Data").GetComponent<DamageData>().AIProjSpeed;
+        lab = GameObject.Find("Data").GetComponent<ModelData>().Lab;
+        Explosion = GameObject.Find("Data").GetComponent<ModelData>().AIExplosion;
     }
 
     void FixedUpdate()

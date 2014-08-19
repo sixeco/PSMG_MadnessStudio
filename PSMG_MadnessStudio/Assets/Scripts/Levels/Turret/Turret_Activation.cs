@@ -11,6 +11,7 @@ public class Turret_Activation : MonoBehaviour {
         if (mode)
         {
             System_ViewInput.Mouse += this.GetComponent<Turret_ViewControl>().TurnCameraMouse;
+            System_ViewInput.GazeOnly += this.GetComponent<Turret_ViewControl>().TurnCameraGaze;
             frontHead.GetComponent<MeshRenderer>().enabled = false;
             stand.GetComponent<MeshRenderer>().enabled = false;
             stand.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
@@ -18,6 +19,7 @@ public class Turret_Activation : MonoBehaviour {
         else
         {
             System_ViewInput.Mouse -= this.GetComponent<Turret_ViewControl>().TurnCameraMouse;
+            System_ViewInput.GazeOnly -= this.GetComponent<Turret_ViewControl>().TurnCameraGaze;
             frontHead.GetComponent<MeshRenderer>().enabled = true;
             stand.GetComponent<MeshRenderer>().enabled = false;
             stand.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;

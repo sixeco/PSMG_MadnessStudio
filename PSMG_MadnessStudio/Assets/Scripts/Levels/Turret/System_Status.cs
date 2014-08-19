@@ -26,16 +26,7 @@ public class System_Status : MonoBehaviour {
         {
             GazeAndAIO = false;
             GazeAndMouse = false;
+            //AOIVisible = false;
         }
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
     }
 }
