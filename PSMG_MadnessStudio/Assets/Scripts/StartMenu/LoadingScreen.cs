@@ -12,7 +12,7 @@ public class LoadingScreen : MonoBehaviour {
     private int loadProgress = 0;
 
 	void Start () {
-        background.SetActive(false);
+        background.SetActive(true);
         text.SetActive(false);
         progressBar.SetActive(false);
     }
