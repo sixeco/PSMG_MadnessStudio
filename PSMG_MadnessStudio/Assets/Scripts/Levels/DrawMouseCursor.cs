@@ -25,8 +25,8 @@ public class DrawMouseCursor : MonoBehaviour {
         }
         else
         {
-            textureRect.x = (Screen.width/2) - (crosshairMouse.width/2);
-            textureRect.y = (Screen.height/2) - (crosshairMouse.height/2);
+            textureRect.x = (Screen.width / 2) - (crosshairMouse.width / 2);
+            textureRect.y = (Screen.height / 2) - (crosshairMouse.height / 2);
             Screen.lockCursor = true;
         }
     }
