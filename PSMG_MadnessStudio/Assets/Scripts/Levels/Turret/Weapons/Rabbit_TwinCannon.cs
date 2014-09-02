@@ -3,17 +3,6 @@ using System.Collections;
 
 public class Rabbit_TwinCannon : MonoBehaviour {
 
-<<<<<<< HEAD
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-=======
     public Transform UpperShotPos;
     public Transform LowerShotPos;
 
@@ -24,5 +13,4 @@ public class Rabbit_TwinCannon : MonoBehaviour {
     {
 
     }
->>>>>>> origin/Gameplay
 }

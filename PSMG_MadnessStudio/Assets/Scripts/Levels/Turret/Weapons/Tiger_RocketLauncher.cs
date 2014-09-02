@@ -2,18 +2,7 @@
 using System.Collections;
 
 public class Tiger_RocketLauncher : MonoBehaviour {
-
-<<<<<<< HEAD
-	// Use this for initialization
-	void Start () {
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-=======
     public delegate Vector3 InputEvent();
     public static event InputEvent MainInput;
 
@@ -53,5 +42,4 @@ public class Tiger_RocketLauncher : MonoBehaviour {
             }
         }
     }
->>>>>>> origin/Gameplay
 }
