@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 0e3460bc8d31bd54996b571595579ef6
+=======
+guid: 4f69484d805763b4f80806bbb9c9eee2
+>>>>>>> origin/Gameplay
 MonoImporter:
   serializedVersion: 2
   defaultReferences: []

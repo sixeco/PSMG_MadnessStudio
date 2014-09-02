@@ -10,8 +10,10 @@ public class System_KeyInput : MonoBehaviour {
     public static event ShootEvent ShootLeft;
     public static event ShootEvent ShootRight;
 
+    private bool gazeActive;
+
 	void Start () {
-	    
+        gazeActive = GameObject.Find("Turret_System").GetComponent<System_Status>().GazeAndAIO;
 	}
 
 	void Update () {
@@ -34,14 +36,29 @@ public class System_KeyInput : MonoBehaviour {
             S_KeyInput(KeyCode.A);
         }
 
-        //Shoot Keys
-        else if (Input.GetKeyDown(KeyCode.J))
+        if (gazeActive)
         {
-            ShootLeft();
+            //Shoot Keys
+            if (Input.GetKey(KeyCode.J))
+            {
+                ShootLeft();
+            }
+            else if (Input.GetKey(KeyCode.K))
+            {
+                ShootRight();
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.K))
+        else
         {
-            ShootRight();
+            //Shoot with mouse
+            if (Input.GetMouseButton(0))
+            {
+                ShootRight();
+            }
+            else if (Input.GetMouseButton(1))
+            {
+                ShootLeft();     
+            }
         }
 	}
 }

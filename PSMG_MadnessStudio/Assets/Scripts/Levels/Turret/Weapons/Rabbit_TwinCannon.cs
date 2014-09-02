@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Rabbit_TwinCannon : MonoBehaviour {
 
+<<<<<<< HEAD
 	// Use this for initialization
 	void Start () {
 	
@@ -12,4 +13,16 @@ public class Rabbit_TwinCannon : MonoBehaviour {
 	void Update () {
 	
 	}
+=======
+    public Transform UpperShotPos;
+    public Transform LowerShotPos;
+
+    private float CoolDown;
+    private Rigidbody projectile;
+
+    void Update()
+    {
+
+    }
+>>>>>>> origin/Gameplay
 }

@@ -47,7 +47,6 @@ public class CursorDrawer : MonoBehaviour {
 
     void Update()
     {
-        Debug.Log("Update from cursor drawer");
         if (gazeActive)
         {
             Vector2 GPos = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
@@ -59,7 +58,6 @@ public class CursorDrawer : MonoBehaviour {
             mouseRect.x = (Screen.width / 2) - (mouseTexture.width / 2);
             mouseRect.y = (Screen.height / 2) - (mouseTexture.height / 2);
             Screen.lockCursor = true;
-            Debug.Log("update else works: " + mouseRect.x + ", " + mouseRect.y);
         }
     }
 
