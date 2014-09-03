@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Cobra_Railgun : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Update()
+    {
+
+    }
+
+    public void Shoot(Vector2 direction)
+    {
+        Debug.Log("Railgun shot"+ direction);
+    }
 }

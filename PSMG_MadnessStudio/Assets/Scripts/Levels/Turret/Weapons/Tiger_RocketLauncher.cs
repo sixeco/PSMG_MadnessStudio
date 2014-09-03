@@ -2,17 +2,12 @@
 using System.Collections;
 
 public class Tiger_RocketLauncher : MonoBehaviour {
-	
-    public delegate Vector3 InputEvent();
-    public static event InputEvent MainInput;
 
     private float CoolDownRocket;
     private float CoolDownRemain;
 
     private GameObject RocketObject;
     public Transform RocketLauncherShotPos;
-
-    public AudioClip rocketSound;
 
     void Start()
     {
@@ -26,20 +21,8 @@ public class Tiger_RocketLauncher : MonoBehaviour {
         CoolDownRemain -= Time.deltaTime;
     }
 
-    void ShootRocket()
+    public void Shoot(Vector2 direction)
     {
-        if (CoolDownRemain <= 0)
-        {
-            CoolDownRemain = CoolDownRocket;
-            Ray ray = this.camera.ScreenPointToRay(MainInput());
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 200f))
-            {
-                Quaternion rotation = Quaternion.LookRotation((hit.point - (RocketLauncherShotPos.transform.position + RocketLauncherShotPos.transform.forward)).normalized);
-                Instantiate(RocketObject, RocketLauncherShotPos.transform.position + RocketLauncherShotPos.transform.forward, rotation);
-                audio.clip = rocketSound;
-                audio.Play();
-            }
-        }
+        Debug.Log("Tiger shot" + direction);
     }
 }

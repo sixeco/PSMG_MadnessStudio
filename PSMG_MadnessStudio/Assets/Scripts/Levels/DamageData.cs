@@ -3,12 +3,13 @@ using System.Collections;
 
 public class DamageData : MonoBehaviour {
 
-    public float LaserDamage;
-    public float RocketDamage;
-    public float CannonDamage;
+    public float RabbitCannonDamage;
+    public float CobraRailDamage;
+    public float TigerRocketDamage;
+    public float WoodpeckerGatlingDamage;
 
-    public float LaserForce;
-    public float CannonForce;
+    public float CobraRailForce;
+    public float RabbitCannonForce;
 
     public float AIProjSpeed;
 }

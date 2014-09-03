@@ -55,8 +55,8 @@ public class TwinCannon : MonoBehaviour {
 
         CannonCoolDown = cools.Cannon;
         LaserCoolDown = cools.LaserMain;
-        shotForce = DD.CannonForce;
-        laserForce = DD.LaserForce;
+        shotForce = DD.RabbitCannonForce;
+        laserForce = DD.CobraRailForce;
 	}
 	
 	void Update () {

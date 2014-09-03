@@ -29,4 +29,9 @@ public class System_Status : MonoBehaviour {
             //AOIVisible = false;
         }
     }
+
+    void Update()
+    {
+
+    }
 }

@@ -1,19 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using iViewX;
 
 public class System_KeyInput : MonoBehaviour {
 
     public delegate void SwitchEvent(KeyCode key);
     public static event SwitchEvent S_KeyInput;
 
-    public delegate void ShootEvent();
+    public delegate void ShootEvent(Vector2 position);
     public static event ShootEvent ShootLeft;
     public static event ShootEvent ShootRight;
 
-    private bool gazeActive;
+    private bool gazeOnlyActive;
+    private bool gazeAndMouseActive;
+    private bool mouseOnlyActive;
 
 	void Start () {
-        gazeActive = GameObject.Find("Turret_System").GetComponent<System_Status>().GazeAndAIO;
+        gazeOnlyActive = this.GetComponent<System_Status>().GazeAndAIO;
+        gazeAndMouseActive = this.GetComponent<System_Status>().GazeAndMouse;
+        mouseOnlyActive = this.GetComponent<System_Status>().MouseOnly;
 	}
 
 	void Update () {
@@ -36,28 +41,26 @@ public class System_KeyInput : MonoBehaviour {
             S_KeyInput(KeyCode.A);
         }
 
-        if (gazeActive)
+        else if (Input.GetKey(KeyCode.J) || Input.GetMouseButton(0))
         {
-            //Shoot Keys
-            if (Input.GetKey(KeyCode.J))
+            if (gazeOnlyActive || gazeAndMouseActive)
             {
-                ShootLeft();
+                ShootLeft((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
             }
-            else if (Input.GetKey(KeyCode.K))
+            else
             {
-                ShootRight();
+                ShootLeft(new Vector2(Screen.width/2, Screen.height/2));
             }
         }
-        else
+        else if (Input.GetKey(KeyCode.K) || Input.GetMouseButton(1))
         {
-            //Shoot with mouse
-            if (Input.GetMouseButton(0))
+            if (gazeOnlyActive || gazeAndMouseActive)
             {
-                ShootRight();
+                ShootRight((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
             }
-            else if (Input.GetMouseButton(1))
+            else
             {
-                ShootLeft();     
+                ShootRight(new Vector2(Screen.width / 2, Screen.height / 2));
             }
         }
 	}

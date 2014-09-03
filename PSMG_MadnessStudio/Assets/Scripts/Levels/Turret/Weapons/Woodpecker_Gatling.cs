@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Woodpecker_Gatling : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Update()
+    {
+
+    }
+
+    public void Shoot(Vector2 direction)
+    {
+        Debug.Log("Woodpecker shot" + direction);
+    }
 }
