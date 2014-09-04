@@ -25,6 +25,6 @@ public class Rabbit_TwinCannon : MonoBehaviour {
     public void Shoot(Vector2 direction)
     {
         Debug.Log("Rabbit shot" + direction);
-        //Instantiate(flash, UpperShotPos.position, Quaternion.identity);
+        Instantiate(flash, UpperShotPos.position, Quaternion.identity);
     }
 }
