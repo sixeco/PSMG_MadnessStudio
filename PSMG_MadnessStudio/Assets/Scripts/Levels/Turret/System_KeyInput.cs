@@ -11,15 +11,12 @@ public class System_KeyInput : MonoBehaviour {
     public static event ShootEvent ShootLeft;
     public static event ShootEvent ShootRight;
 
-    private bool gazeOnlyActive;
-    private bool gazeAndMouseActive;
-    private bool mouseOnlyActive;
+    private System_Status status;
 
-	void Start () {
-        gazeOnlyActive = this.GetComponent<System_Status>().GazeAndAIO;
-        gazeAndMouseActive = this.GetComponent<System_Status>().GazeAndMouse;
-        mouseOnlyActive = this.GetComponent<System_Status>().MouseOnly;
-	}
+    void Start()
+    {
+        status = GameObject.Find("Turret_System").GetComponent<System_Status>();
+    }
 
 	void Update () {
 
@@ -43,7 +40,7 @@ public class System_KeyInput : MonoBehaviour {
 
         else if (Input.GetKey(KeyCode.J) || Input.GetMouseButton(0))
         {
-            if (gazeOnlyActive || gazeAndMouseActive)
+            if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
             {
                 ShootLeft((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
             }
@@ -54,7 +51,7 @@ public class System_KeyInput : MonoBehaviour {
         }
         else if (Input.GetKey(KeyCode.K) || Input.GetMouseButton(1))
         {
-            if (gazeOnlyActive || gazeAndMouseActive)
+            if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
             {
                 ShootRight((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
             }

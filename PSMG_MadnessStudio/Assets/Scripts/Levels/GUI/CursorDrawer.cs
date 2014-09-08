@@ -10,18 +10,11 @@ public class CursorDrawer : MonoBehaviour {
     Rect gazeRect;
     Rect mouseRect;
 
-    bool GazeAndMouse;
-    bool GazeAndAOI;
-    bool MouseOnly;
-
-    bool gazeActive = false;
+    System_Status status;
+    float LerpSpeed;
 
     void Awake()
     {
-        GazeAndMouse = GameObject.Find("Turret_System").GetComponent<System_Status>().GazeAndMouse;
-        GazeAndAOI = GameObject.Find("Turret_System").GetComponent<System_Status>().GazeAndAIO;
-        MouseOnly = GameObject.Find("Turret_System").GetComponent<System_Status>().MouseOnly;
-
         gazeTexture = GameObject.Find("Data").GetComponent<TextureData>().crosshairGaze;
         mouseTexture = GameObject.Find("Data").GetComponent<TextureData>().crosshairMouse;
 
@@ -31,27 +24,18 @@ public class CursorDrawer : MonoBehaviour {
 
     void Start()
     {
-        if (GazeAndAOI)
-        {
-            gazeActive = true;
-        }
-        else if (GazeAndMouse)
-        {
-            gazeActive = true;
-        }
-        else
-        {
-            gazeActive = false;
-        }
+        status = GameObject.Find("Turret_System").GetComponent<System_Status>();
+        LerpSpeed = GameObject.Find("Data").GetComponent<GUIData>().PointerFlowSpeed;
     }
 
     void Update()
     {
-        if (gazeActive)
+        if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
         {
             Vector2 GPos = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
-            gazeRect.x = GPos.x - (gazeTexture.width/2);
-            gazeRect.y = GPos.y - (gazeTexture.height / 2);
+            //gazeRect.x = GPos.x - (gazeTexture.width/2);
+            //gazeRect.y = GPos.y - (gazeTexture.height / 2);
+            gazeRect.position = Vector2.Lerp(gazeRect.position, new Vector2((GPos.x - (gazeTexture.width / 2)), (GPos.y - (gazeTexture.height / 2))), LerpSpeed);
         }
         else
         {
@@ -63,13 +47,16 @@ public class CursorDrawer : MonoBehaviour {
 
     void OnGUI()
     {
-        if (gazeActive)
+        if (status.SelectedCursorType == System_Status.AimCursorType.GUI)
         {
-            GUI.DrawTexture(gazeRect, gazeTexture);
-        }
-        else
-        {
-            GUI.DrawTexture(mouseRect, mouseTexture);
+            if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
+            {
+                GUI.DrawTexture(gazeRect, gazeTexture);
+            }
+            else
+            {
+                GUI.DrawTexture(mouseRect, mouseTexture);
+            }
         }
     }
 }

@@ -8,31 +8,45 @@ public class Turret_Activation : MonoBehaviour {
 
     public GameObject Left;
     public GameObject Right;
-
-    void Update()
-    {
-
-    }
+    public GameObject AimLight;
 
     public void setActivation(bool mode)
     {
         if (mode)
         {
+            //Assign Cameraturn event
             System_ViewInput.Mouse += this.GetComponent<Turret_ViewControl>().TurnCameraMouse;
             System_ViewInput.GazeOnly += this.GetComponent<Turret_ViewControl>().TurnCameraGaze;
+            
+            //Disable the stand so it becomes invisible
+            stand.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
             frontHead.GetComponent<MeshRenderer>().enabled = false;
             stand.GetComponent<MeshRenderer>().enabled = false;
-            stand.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+            
+            //Activate the AimLight
+            AimLight.GetComponent<MeshRenderer>().enabled = true;
+            //(AimLight.GetComponent("Halo") as Behaviour).enabled = true;
+            
+            //Assign the Weapons to the Event-handler
             AssignLeftWeapon();
             AssignRightWeapon();
         }
         else
         {
+            //Disable Cameraturn event
             System_ViewInput.Mouse -= this.GetComponent<Turret_ViewControl>().TurnCameraMouse;
             System_ViewInput.GazeOnly -= this.GetComponent<Turret_ViewControl>().TurnCameraGaze;
+
+            //Show Static objects
             frontHead.GetComponent<MeshRenderer>().enabled = true;
             stand.GetComponent<MeshRenderer>().enabled = true;
             stand.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+
+            //Hide AimLight
+            AimLight.GetComponent<MeshRenderer>().enabled = false;
+            //(AimLight.GetComponent("Halo") as Behaviour).enabled = false;
+
+            //Disable Fire-events
             DisableLeftWeapon();
             DisableRightWeapon();
         }

@@ -6,6 +6,10 @@ public class Rabbit_TwinCannon : MonoBehaviour {
     public Transform UpperShotPos;
     public Transform LowerShotPos;
     public Camera Camera;
+    public GUIText guiText;
+
+    public int Ammo;
+    private int MagSize = 100;
 
     private float CoolDown;
     private float coolDownRemain;
@@ -30,17 +34,21 @@ public class Rabbit_TwinCannon : MonoBehaviour {
     {
         turn = true;
         coolDownRemain = 0;
+        Ammo = MagSize;
+        guiText.text = Ammo + "/" + MagSize;
+        RayCheckRange = GameObject.Find("Data").GetComponent<GUIData>().RayCheckRange;
     }
 
     void Update()
     {
         coolDownRemain -= Time.deltaTime;
+        guiText.text = Ammo + "/" + MagSize;
     }
 
     public void Shoot(Vector2 direction)
     {
-        if (coolDownRemain <= 0)
-        {
+        if (coolDownRemain <= 0 && Ammo > 0)
+        { 
             Ray ray = Camera.ScreenPointToRay(new Vector3(direction.x, Screen.height - direction.y, 0));
             RaycastHit hitInfo;
 
@@ -53,6 +61,7 @@ public class Rabbit_TwinCannon : MonoBehaviour {
                     Vector3 UpperShotVector = hitInfo.point - upperShot.transform.position;
                     upperShot.AddForce(UpperShotVector * shotForce, ForceMode.Acceleration);
                     turn = !turn;
+                    Ammo--;
                 }
                 else
                 {
@@ -61,10 +70,21 @@ public class Rabbit_TwinCannon : MonoBehaviour {
                     Vector3 LowerShotVector = hitInfo.point - lowerShot.transform.position;
                     lowerShot.AddForce(LowerShotVector * shotForce, ForceMode.Acceleration);
                     turn = !turn;
+                    Ammo--;
                 }
 
                 coolDownRemain = CoolDown;
             }
         }
+        else if(Ammo <= 0)
+        {
+            StartCoroutine(Reload());
+        }
+    }
+
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(5f);
+        Ammo = MagSize;
     }
 }
