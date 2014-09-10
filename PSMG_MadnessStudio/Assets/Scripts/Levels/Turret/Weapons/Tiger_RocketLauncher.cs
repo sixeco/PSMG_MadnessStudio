@@ -11,12 +11,16 @@ public class Tiger_RocketLauncher : MonoBehaviour {
     public Transform RocketLauncherShotPos;
     public Camera camera;
 
+    private float RayCheckRange;
+
     void Start()
     {
         CoolDownRemain = 0;
-        CoolDown = GameObject.Find("Data").GetComponent<CoolDownValues>().RocketMain;
-        RocketObject = GameObject.Find("Data").GetComponent<ModelData>().RocketModel;
-        flash = GameObject.Find("Data").GetComponent<ModelData>().CannonMuzzleFlash;
+        GameObject data = GameObject.Find("Data");
+        CoolDown = data.GetComponent<CoolDownValues>().RocketMain;
+        RocketObject = data.GetComponent<ModelData>().RocketModel;
+        flash = data.GetComponent<ModelData>().CannonMuzzleFlash;
+        RayCheckRange = data.GetComponent<GUIData>().RayCheckRange;
     }
 
     void Update()
@@ -31,10 +35,10 @@ public class Tiger_RocketLauncher : MonoBehaviour {
             CoolDownRemain = CoolDown;
             Ray ray = camera.ScreenPointToRay(new Vector3(direction.x, Screen.height - direction.y, 0));
             RaycastHit hitInfo;
-            if (Physics.Raycast(ray, out hitInfo, 300f))
+            if (Physics.Raycast(ray, out hitInfo, RayCheckRange))
             {
                 Quaternion rotation = Quaternion.LookRotation((hitInfo.point - (RocketLauncherShotPos.transform.position + RocketLauncherShotPos.transform.forward)).normalized);
-                Instantiate(flash, RocketLauncherShotPos.position + RocketLauncherShotPos.up, Quaternion.identity);
+                Instantiate(flash, RocketLauncherShotPos.position + RocketLauncherShotPos.up, rotation);
                 Instantiate(RocketObject, RocketLauncherShotPos.transform.position, rotation);
             }
         }

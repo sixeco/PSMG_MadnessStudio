@@ -10,4 +10,5 @@ public class WeaponsData : MonoBehaviour {
     public bool Tortoise;
 
     public float WoodpeckerSpinSpeed;
+    public float TigerRocketSpeed;
 }

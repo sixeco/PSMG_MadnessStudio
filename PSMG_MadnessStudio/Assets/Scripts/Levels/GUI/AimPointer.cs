@@ -25,6 +25,7 @@ public class AimPointer : MonoBehaviour {
     {
         if (status.SelectedCursorType == System_Status.AimCursorType.LaserPointer)
         {
+            PointLight.GetComponent<MeshRenderer>().enabled = true;
             Screen.lockCursor = true;
             Ray ray = new Ray();
             if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
@@ -43,6 +44,10 @@ public class AimPointer : MonoBehaviour {
                 PointLight.transform.localScale = PointerScale * ((Vector3.Distance(this.transform.position, hitInfo.point)) / 130f);
                 PointLight.transform.position = Vector3.Lerp(PointLight.transform.position, hitInfo.point, LerpSpeed);
             }
+        }
+        else
+        {
+            PointLight.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 }
