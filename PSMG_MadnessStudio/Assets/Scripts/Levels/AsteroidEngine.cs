@@ -20,12 +20,16 @@ public class AsteroidEngine : MonoBehaviour {
         gameObject.rigidbody.AddTorque(rotation * speed, ForceMode.Acceleration);
     }
 
-    void OnTriggerEnter(Collider collider)
+    public void Detonate()
     {
-        if (collider.name.Equals("Tortoise_Forcefield"))
+        Instantiate(explosion, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
+    void OnTriggerEnter(Collider c)
+    {
+        if (c.name.Equals("Dome"))
         {
-            Debug.Log("Tortoise blocked the hit");
-            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

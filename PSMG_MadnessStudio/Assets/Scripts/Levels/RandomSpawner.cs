@@ -24,7 +24,8 @@ public class RandomSpawner : MonoBehaviour {
             Vector3 randomVector = new Vector3(transform.position.x, Random.Range(transform.position.y - SpawnFieldRange, transform.position.y + SpawnFieldRange), Random.Range(transform.position.z - SpawnFieldRange, transform.position.z + SpawnFieldRange));
             if (asteroids[index] != null)
             {
-                Instantiate(asteroids[index], randomVector, Quaternion.identity);
+                GameObject temp = asteroids[index];
+                Instantiate(temp, randomVector, Quaternion.identity);
             }
             remain = Random.Range(IntervalMin, IntervalMax);
         }

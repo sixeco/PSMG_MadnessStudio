@@ -152,27 +152,25 @@ public class ShieldEffectScript : MonoBehaviour
 
 	void OnCollisionEnter(Collision C) 
 	{
+        Debug.Log("Collision happened");
 		try
 		{
 			//make sure object is a projectile and is not owned by the same person who is in the shield
-			if (
-				C.gameObject.tag == "Projectile" 
-				&& C.gameObject.GetComponent<OwnerScript>().Owner != gameObject.transform.parent.gameObject
-				)
+			if (C.gameObject.tag == "Asteroid")   
 			{
-				
-				ShowEffect(C.gameObject,ShapeOption);
+                //&& C.gameObject.GetComponent<OwnerScript>().Owner != gameObject.transform.parent.gameObject
+				ShowEffect(C.gameObject, ShapeOption);
 				
 				
 				if (PhysOption == PhysOptions.ReflectProjectile )
 				{
 					
-					//nothing
+					//Decreasing HP of shield
 					
 				}
 				else
 				{
-					Destroy(C.gameObject);
+                    C.gameObject.GetComponent<AsteroidEngine>().Detonate();
 				}
 				
 			}

@@ -13,7 +13,7 @@ public class Rabbit_ProjCollision : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag.Equals("Rock"))
+        if (collider.gameObject.tag.Equals("Asteroid"))
         {
             AsteroidHP h = collider.gameObject.GetComponent<AsteroidHP>();
             if (h != null)
