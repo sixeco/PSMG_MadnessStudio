@@ -27,6 +27,8 @@ public class AimPointer : MonoBehaviour {
         {
             PointLight.GetComponent<MeshRenderer>().enabled = true;
             Screen.lockCursor = true;
+
+            //Shoot out ray based on input type
             Ray ray = new Ray();
             if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
             {
@@ -38,6 +40,7 @@ public class AimPointer : MonoBehaviour {
                 ray = cam.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
             }
 
+            //Lerp Pointer to hit-position
             RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo, RayCheckRange))
             {

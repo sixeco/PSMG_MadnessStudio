@@ -14,5 +14,5 @@ public class DamageData : MonoBehaviour {
 
     public int AsteroidHealth;
     public int AsteroidDamage;
-    public int ShieldHealth;
+    public int TortoiseHealth;
 }

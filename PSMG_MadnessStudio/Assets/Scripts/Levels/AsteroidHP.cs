@@ -15,7 +15,9 @@ public class AsteroidHP : MonoBehaviour {
     void Update()
     {
         if (hitPoints <= 0)
-        {
+        {   
+            HighScore.Score += 10 * HighScore.Multiplier;
+            HighScore.Multiplier++;
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }

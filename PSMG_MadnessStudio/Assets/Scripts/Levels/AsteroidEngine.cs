@@ -7,17 +7,23 @@ public class AsteroidEngine : MonoBehaviour {
     Vector3 direction;
     Vector3 rotation;
     GameObject explosion;
+    HighScore scoreEngine;
 
     void Start()
     {
+        scoreEngine = GameObject.Find("GUI").GetComponent<HighScore>();
+
         float min = GameObject.Find("AsteroidSpawner").GetComponent<RandomSpawner>().minSpeed;
         float max = GameObject.Find("AsteroidSpawner").GetComponent<RandomSpawner>().maxSpeed;
         speed = Random.Range(min, max);
         direction = -transform.position;
+        direction.z += Random.Range(-20, 20);
+        direction.y += Random.Range(-20, 20);
         rotation = new Vector3(Random.Range(min, max), Random.Range(min, max), Random.Range(min, max));
         explosion = GameObject.Find("Data").GetComponent<ModelData>().AIExplosion;
         gameObject.rigidbody.AddForce(direction * speed, ForceMode.Acceleration);
         gameObject.rigidbody.AddTorque(rotation * speed, ForceMode.Acceleration);
+        transform.localScale = Vector3.Lerp(Vector3.zero, transform.localScale, 0.8f);
     }
 
     public void Detonate()

@@ -24,6 +24,14 @@ public class ShieldEffectScript : MonoBehaviour
 	public GameObject GenericEffect_Sphere;
 	public GameObject GenericEffect_Plane;
 
+    private float damage;
+    private HighScore scoreEngine;
+
+    void Awake()
+    {
+        damage = GameObject.Find("Data").GetComponent<DamageData>().AsteroidDamage;
+        scoreEngine = GameObject.Find("GUI").GetComponent<HighScore>();
+    }
 
 	//Instantiate the effect and set some of it's variables
 	public void ShowEffect(GameObject Target ,ShapeOptions input_ShapeOptions )
@@ -152,11 +160,10 @@ public class ShieldEffectScript : MonoBehaviour
 
 	void OnCollisionEnter(Collision C) 
 	{
-        Debug.Log("Collision happened");
 		try
 		{
 			//make sure object is a projectile and is not owned by the same person who is in the shield
-			if (C.gameObject.tag == "Asteroid")   
+			if (C.gameObject.tag.Equals("Asteroid") || C.gameObject.tag.Equals("Projectile"))   
 			{
                 //&& C.gameObject.GetComponent<OwnerScript>().Owner != gameObject.transform.parent.gameObject
 				ShowEffect(C.gameObject, ShapeOption);
@@ -172,6 +179,9 @@ public class ShieldEffectScript : MonoBehaviour
 				{
                     C.gameObject.GetComponent<AsteroidEngine>().Detonate();
 				}
+
+                HighScore.Multiplier = 1;
+                this.GetComponent<TortoiseLife>().HP -= damage;
 				
 			}
 		}

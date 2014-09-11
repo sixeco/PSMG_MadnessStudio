@@ -7,8 +7,9 @@ public class WeaponsData : MonoBehaviour {
 
     public SelectedWeapon Left;
     public SelectedWeapon Right;
-    public bool Tortoise;
 
     public float WoodpeckerSpinSpeed;
+    public float WoodpeckerProjectileSpeed;
     public float TigerRocketSpeed;
+    public float CobraProjectileSpeed;
 }

@@ -10,4 +10,6 @@ public class ModelData : MonoBehaviour {
     public GameObject LaserSpark;
     public GameObject Lab;
     public GameObject AIExplosion;
+    public GameObject WoopeckerProjectile;
+    public GameObject CobraProjectile;
 }
