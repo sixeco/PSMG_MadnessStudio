@@ -12,4 +12,5 @@ public class ModelData : MonoBehaviour {
     public GameObject AIExplosion;
     public GameObject WoopeckerProjectile;
     public GameObject CobraProjectile;
+    public GameObject CobraMuszzleFlash;
 }

@@ -14,6 +14,9 @@ public class Woodpecker_Gatling : MonoBehaviour {
     private GameObject Flash;
     private GameObject ProjectileEffect;
 
+    private AudioClip[] shotSounds;
+    private AudioSource source;
+
     private int Damage;
 
     void Start()
@@ -24,6 +27,8 @@ public class Woodpecker_Gatling : MonoBehaviour {
         Damage = data.GetComponent<DamageData>().WoodpeckerGatlingDamage;
         Flash = data.GetComponent<ModelData>().CannonMuzzleFlash;
         ProjectileEffect = data.GetComponent<ModelData>().WoopeckerProjectile;
+        shotSounds = data.GetComponent<AudioData>().WoodpeckerShotSounds;
+        source = shotPos.GetComponent<AudioSource>();
         CoolDownRemain = 0;
     }
 
@@ -56,6 +61,11 @@ public class Woodpecker_Gatling : MonoBehaviour {
                 Instantiate(Flash, shotPos.position, Quaternion.identity);
                 Quaternion rotation = Quaternion.LookRotation((hitRandom - (shotPos.transform.position + shotPos.transform.forward)).normalized);
                 Instantiate(ProjectileEffect, shotPos.position, rotation);
+
+                //Shoot sound
+                int index = Random.Range(0, shotSounds.Length - 1);
+                source.clip = shotSounds[index];
+                source.Play();
             }
         }
     }

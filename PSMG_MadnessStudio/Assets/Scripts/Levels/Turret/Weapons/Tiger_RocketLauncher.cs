@@ -11,6 +11,9 @@ public class Tiger_RocketLauncher : MonoBehaviour {
     public Transform RocketLauncherShotPos;
     public Camera camera;
 
+    private AudioClip[] shotSounds;
+    private AudioSource source;
+
     private float RayCheckRange;
 
     void Start()
@@ -21,6 +24,8 @@ public class Tiger_RocketLauncher : MonoBehaviour {
         RocketObject = data.GetComponent<ModelData>().RocketModel;
         flash = data.GetComponent<ModelData>().CannonMuzzleFlash;
         RayCheckRange = data.GetComponent<GUIData>().RayCheckRange;
+        source = RocketLauncherShotPos.GetComponent<AudioSource>();
+        shotSounds = data.GetComponent<AudioData>().TigerShotSounds;
     }
 
     void Update()
@@ -40,6 +45,10 @@ public class Tiger_RocketLauncher : MonoBehaviour {
                 Quaternion rotation = Quaternion.LookRotation((hitInfo.point - (RocketLauncherShotPos.transform.position + RocketLauncherShotPos.transform.forward)).normalized);
                 Instantiate(flash, RocketLauncherShotPos.position + RocketLauncherShotPos.up, rotation);
                 Instantiate(RocketObject, RocketLauncherShotPos.transform.position, rotation);
+
+                int index = Random.Range(0, shotSounds.Length - 1);
+                source.clip = shotSounds[index];
+                source.Play();
             }
         }
     }

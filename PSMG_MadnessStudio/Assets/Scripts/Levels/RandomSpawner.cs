@@ -6,7 +6,8 @@ public class RandomSpawner : MonoBehaviour {
     public GameObject[] asteroids;
     public float IntervalMax;
     public float IntervalMin;
-    public float SpawnFieldRange;
+    public float UpDownRange;
+    public float LeftRightRange;
     public float minSpeed;
     public float maxSpeed;
 
@@ -21,7 +22,7 @@ public class RandomSpawner : MonoBehaviour {
         if (remain <= 0)
         {
             int index = Random.Range(0, asteroids.Length - 1);
-            Vector3 randomVector = new Vector3(transform.position.x, Random.Range(transform.position.y - SpawnFieldRange, transform.position.y + SpawnFieldRange), Random.Range(transform.position.z - SpawnFieldRange, transform.position.z + SpawnFieldRange));
+            Vector3 randomVector = new Vector3(transform.position.x, Random.Range(transform.position.y - UpDownRange, transform.position.y + UpDownRange), Random.Range(transform.position.z - LeftRightRange, transform.position.z + LeftRightRange));
             if (asteroids[index] != null)
             {
                 GameObject temp = asteroids[index];

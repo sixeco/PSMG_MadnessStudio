@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TigerRocket_Engine : MonoBehaviour {
 
-    float speed;
+    public float speed;
 
     void Start()
     {

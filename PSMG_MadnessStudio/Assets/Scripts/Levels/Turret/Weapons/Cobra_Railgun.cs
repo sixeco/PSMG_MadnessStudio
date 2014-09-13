@@ -14,16 +14,19 @@ public class Cobra_Railgun : MonoBehaviour {
     private float CoolDown;
     private float CoolDownRemain;
 
+    private AudioClip[] shotSounds;
+
     private int Damage;
 
     void Start()
     {
         GameObject data = GameObject.Find("Data");
         Strike = data.GetComponent<ModelData>().LaserSpark;
-        Flash = data.GetComponent<ModelData>().CannonMuzzleFlash;
+        Flash = data.GetComponent<ModelData>().CobraMuszzleFlash;
         Projectile = data.GetComponent<ModelData>().CobraProjectile;
         RayCheckRange = data.GetComponent<GUIData>().RayCheckRange;
         CoolDown = data.GetComponent<CoolDownValues>().LaserMain;
+        shotSounds = data.GetComponent<AudioData>().CobraShotSounds;
         CoolDownRemain = 0;
         Damage = data.GetComponent<DamageData>().CobraRailDamage;
     }
@@ -51,9 +54,16 @@ public class Cobra_Railgun : MonoBehaviour {
                         h.AddDamage(Damage);
                     }
                 }
+                AudioSource source = shotPos.GetComponent<AudioSource>();
+                if (source != null)
+                {
+                    int index = Random.Range(0, shotSounds.Length - 1);
+                    source.clip = shotSounds[index];
+                    source.Play();
+                }
                 Quaternion rotation = Quaternion.LookRotation((hit.point - (shotPos.transform.position + shotPos.transform.forward)).normalized);
                 Instantiate(Projectile, shotPos.position, rotation);
-                Instantiate(Flash, shotPos.position, Quaternion.identity);
+                Instantiate(Flash, shotPos.position, rotation);
                 Instantiate(Strike, hit.point, Quaternion.identity);
             }
         }

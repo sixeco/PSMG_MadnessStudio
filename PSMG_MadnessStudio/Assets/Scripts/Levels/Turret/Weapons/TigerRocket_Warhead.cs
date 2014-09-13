@@ -5,51 +5,88 @@ public class TigerRocket_Warhead : MonoBehaviour {
 
     GameObject Explosion;
 
-    public float checkRadius = 100;
-    public float explosionForce = 5;
-    public float explosionRadius = 5;
-    public float explosionAnchor = 1;
+    float ExplosionRadius;
 
-    //public float damage = 200f; //Damage at center of explosion
-    //public float explosionRadius = 3f;
+    bool sensorLockOn;
+    bool targetLockOn;
+
+    int damage;
+    GameObject target;
+    float rotationSpeed = 10f;
+    float RayCheckRange;
 
     void Start()
     {
-        Explosion = GameObject.Find("Data").GetComponent<ModelData>().RocketExplosion;
+        sensorLockOn = false;
+        targetLockOn = false;
+        GameObject data = GameObject.Find("Data");
+        Explosion = data.GetComponent<ModelData>().RocketExplosion;
+        damage = data.GetComponent<DamageData>().TigerRocketDamage;
+        ExplosionRadius = data.GetComponent<DamageData>().TigerExplosionRadius;
+        RayCheckRange = data.GetComponent<GUIData>().RayCheckRange;
     }
 
-    void OnTriggerEnter()
+    void Update()
     {
-        Detonate();
-    }
-
-    void Detonate()
-    {
-        Vector3 explosionPoint = transform.position;
-
-        Instantiate(Explosion, explosionPoint, Quaternion.identity);
-        Destroy(gameObject);
-
-        /*
-        Collider[] colliders = Physics.OverlapSphere(explosionPoint, checkRadius);
-
-        foreach (Collider c in colliders)
+        if (target == null)
         {
-            if (c.rigidbody == null)
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, RayCheckRange))
             {
-                continue;
+                if (hit.collider.gameObject.tag.Equals("Asteroid"))
+                {
+                    this.GetComponent<SphereCollider>().enabled = false;
+                    target = hit.collider.gameObject;
+                    targetLockOn = true;
+                }
             }
+        }
+        if ((targetLockOn || sensorLockOn) && target != null)
+        {
+            this.GetComponent<TigerRocket_Engine>().speed *= 1.01f;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.transform.position - transform.position), rotationSpeed * Time.deltaTime);
+        }
+        else if ((sensorLockOn || targetLockOn) && target == null)
+        {
+            StartCoroutine(Detonate());
+        }
+    }
 
-            c.rigidbody.AddExplosionForce(explosionForce, explosionPoint, explosionRadius, explosionAnchor, ForceMode.Impulse);
-            Destroy(gameObject);
-
-            HP h = c.GetComponent<HP>();
-            if (h != null)
+    void OnTriggerEnter(Collider c)
+    {
+        if (c.gameObject.tag.Equals("Asteroid"))
+        {
+            if (targetLockOn == false && sensorLockOn == false)
             {
-                //float distance = Vector3.Distance(explosionPoint, c.transform.position);
-                //float damageRatio = 1f - (distance / explosionRadius);
-                h.AddDamage(objectDamage);
+                this.GetComponent<SphereCollider>().enabled = false;
+                target = c.gameObject;
+                sensorLockOn = true;
             }
-        }*/
+            else if (targetLockOn || sensorLockOn)
+            {
+                Collider[] colliders = Physics.OverlapSphere(transform.position, ExplosionRadius);
+                foreach (Collider col in colliders)
+                {
+                    AsteroidHP a = col.GetComponent<AsteroidHP>();
+                    if (a != null)
+                    {
+                        a.AddDamage(damage);
+                    }
+                }
+                Instantiate(Explosion, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+        }
+        else if (c.gameObject.tag.Equals("Dome"))
+        {
+            StartCoroutine(Detonate());
+        }
+    }
+
+    IEnumerator Detonate()
+    {
+        yield return new WaitForSeconds(1);
+        Instantiate(Explosion, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

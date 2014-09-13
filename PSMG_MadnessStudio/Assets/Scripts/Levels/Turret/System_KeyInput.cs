@@ -38,7 +38,7 @@ public class System_KeyInput : MonoBehaviour {
             S_KeyInput(KeyCode.A);
         }
 
-        else if (Input.GetKey(KeyCode.J) || Input.GetMouseButton(0))
+        if (Input.GetKey(KeyCode.J) || Input.GetMouseButton(0))
         {
             if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
             {
@@ -49,7 +49,7 @@ public class System_KeyInput : MonoBehaviour {
                 ShootLeft(new Vector2(Screen.width/2, Screen.height/2));
             }
         }
-        else if (Input.GetKey(KeyCode.K) || Input.GetMouseButton(1))
+        if (Input.GetKey(KeyCode.K) || Input.GetMouseButton(1))
         {
             if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
             {

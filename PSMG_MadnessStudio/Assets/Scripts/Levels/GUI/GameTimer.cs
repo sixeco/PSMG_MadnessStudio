@@ -5,23 +5,25 @@ public class GameTimer : MonoBehaviour {
 
     public GUIText GuiText;
 
-    private float seconds;
+    float secondsStart;
+    public float remainingSeconds;
 
     void Start()
     {
-        seconds = GameObject.Find("Data").GetComponent<GameData>().TrialTimeSecond;
+        secondsStart = GameObject.Find("Data").GetComponent<GameData>().TrialTimeSecond;
+        remainingSeconds = secondsStart;
     }
 
     void Update()
     {
-        float temp = seconds - Time.time;
-        if ((int)temp % 60 < 10)
+        remainingSeconds = secondsStart - Time.time;
+        if ((int)remainingSeconds % 60 < 10)
         {
-            GuiText.text = ((int)temp / 60) + " : 0" + ((int)temp % 60);
+            GuiText.text = ((int)remainingSeconds / 60) + " : 0" + ((int)remainingSeconds % 60);
         }
         else
         {
-            GuiText.text = ((int)temp / 60) + " : " + ((int)temp % 60);
+            GuiText.text = ((int)remainingSeconds / 60) + " : " + ((int)remainingSeconds % 60);
         }
     }
 }

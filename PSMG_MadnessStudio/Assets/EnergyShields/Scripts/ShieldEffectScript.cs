@@ -180,7 +180,7 @@ public class ShieldEffectScript : MonoBehaviour
                     C.gameObject.GetComponent<AsteroidEngine>().Detonate();
 				}
 
-                HighScore.Multiplier = 1;
+                HighScore.Multiplier /= 2;
                 this.GetComponent<TortoiseLife>().HP -= damage;
 				
 			}

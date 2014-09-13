@@ -15,6 +15,10 @@ public class Rabbit_TwinCannon : MonoBehaviour {
     private Rigidbody projectile;
     private GameObject flash;
 
+    private AudioClip[] shotSounds;
+    private AudioSource uppperSource;
+    private AudioSource lowerSource;
+
     private bool turn;
     private float RayCheckRange;
 
@@ -25,6 +29,9 @@ public class Rabbit_TwinCannon : MonoBehaviour {
         flash = data.GetComponent<ModelData>().CannonMuzzleFlash;
         CoolDown = data.GetComponent<CoolDownValues>().Cannon;
         shotForce = data.GetComponent<DamageData>().RabbitCannonForce;
+        shotSounds = data.GetComponent<AudioData>().RabbitShotSounds;
+        uppperSource = UpperShotPos.GetComponent<AudioSource>();
+        lowerSource = LowerShotPos.GetComponent<AudioSource>();
     }
 
     void Start()
@@ -50,19 +57,31 @@ public class Rabbit_TwinCannon : MonoBehaviour {
             {
                 if (turn)
                 {
+                    Quaternion rotation = Quaternion.LookRotation((hitInfo.point - (LowerShotPos.transform.position + LowerShotPos.transform.forward)).normalized);
                     Instantiate(flash, UpperShotPos.position, Camera.transform.localRotation);
-                    Rigidbody upperShot = Instantiate(projectile, UpperShotPos.position, UpperShotPos.rotation) as Rigidbody;
-                    Vector3 UpperShotVector = hitInfo.point - upperShot.transform.position;
-                    upperShot.AddForce(UpperShotVector * shotForce, ForceMode.Acceleration);
+                    Instantiate(projectile, UpperShotPos.position, UpperShotPos.rotation);
+                    //Rigidbody upperShot = Instantiate(projectile, UpperShotPos.position, UpperShotPos.rotation) as Rigidbody;
+                    //Vector3 UpperShotVector = hitInfo.point - upperShot.transform.position;
+                    //upperShot.AddForce(UpperShotVector * shotForce, ForceMode.Acceleration);
                     turn = !turn;
+
+                    int index = Random.Range(0, shotSounds.Length - 1);
+                    uppperSource.clip = shotSounds[index];
+                    uppperSource.Play();
                 }
                 else
                 {
+                    Quaternion rotation = Quaternion.LookRotation((hitInfo.point - (LowerShotPos.transform.position + LowerShotPos.transform.forward)).normalized);
                     Instantiate(flash, LowerShotPos.position, Camera.transform.localRotation);
-                    Rigidbody lowerShot = Instantiate(projectile, LowerShotPos.position, LowerShotPos.rotation) as Rigidbody;
-                    Vector3 LowerShotVector = hitInfo.point - lowerShot.transform.position;
-                    lowerShot.AddForce(LowerShotVector * shotForce, ForceMode.Acceleration);
+                    Instantiate(projectile, LowerShotPos.position, LowerShotPos.rotation);
+                    //Rigidbody lowerShot = Instantiate(projectile, LowerShotPos.position, LowerShotPos.rotation) as Rigidbody;
+                    //Vector3 LowerShotVector = hitInfo.point - lowerShot.transform.position;
+                    //lowerShot.AddForce(LowerShotVector * shotForce, ForceMode.Acceleration);
                     turn = !turn;
+
+                    int index = Random.Range(0, shotSounds.Length - 1);
+                    lowerSource.clip = shotSounds[index];
+                    lowerSource.Play();
                 }
 
                 coolDownRemain = CoolDown;

@@ -12,4 +12,12 @@ public class WeaponsData : MonoBehaviour {
     public float WoodpeckerProjectileSpeed;
     public float TigerRocketSpeed;
     public float CobraProjectileSpeed;
+    public float RabbitProkectileSpeed;
+
+    public bool GraviyGun;
+    public float CatchRange;
+    public float HoldDistance;
+    public float MinimumForce;
+    public float MaximumForce;
+    public float ForceChargePerSec;
 }
