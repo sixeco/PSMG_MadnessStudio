@@ -3,11 +3,9 @@ using System.Collections;
 
 public class AudioData : MonoBehaviour {
 
-    public AudioSource[] SmokeShotSounds;
-    public AudioSource[] LaserShotSounds;
-    public AudioSource[] ExplosionSounds;
-    public AudioSource[] RocketSounds;
-    public AudioSource[] BackgroundSounds;
-    public AudioSource[] DestructionSounds;
-    public AudioSource[] BackgroundMusic;
+    public AudioClip[] RabbitShotSounds;
+    public AudioClip[] CobraShotSounds;
+    public AudioClip[] TigerShotSounds;
+    public AudioClip[] WoodpeckerShotSounds;
+    public AudioClip[] DestructionSounds;
 }

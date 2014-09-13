@@ -3,30 +3,23 @@ using System.Collections;
 
 public class System_Status : MonoBehaviour {
 
-    public bool GazeAndAIO;
-    public bool GazeAndMouse;
-    public bool MouseOnly;
+    public enum ControlType { GazeAndAOI, GazeAndMouse, MouseOnly };
+    public ControlType SelectedControls;
+
+    public enum AimCursorType { GUI, LaserPointer };
+    public AimCursorType SelectedCursorType;
+
     public bool AOIVisible;
 
-    public string currentStatus;
-
-    void Awake()
+    void Start()
     {
-        if (GazeAndAIO)
+        if (SelectedControls == ControlType.GazeAndAOI || SelectedControls == ControlType.GazeAndMouse)
         {
-            GazeAndMouse = false;
-            MouseOnly = false;
+            GameObject.Find("GazeController").SetActive(true);
         }
-        else if (GazeAndMouse)
+        else
         {
-            GazeAndAIO = false;
-            MouseOnly = false;
-        }
-        else if (MouseOnly)
-        {
-            GazeAndAIO = false;
-            GazeAndMouse = false;
-            //AOIVisible = false;
+            GameObject.Find("GazeController").SetActive(false);
         }
     }
 }

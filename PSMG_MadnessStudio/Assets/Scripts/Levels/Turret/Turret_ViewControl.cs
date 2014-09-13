@@ -37,7 +37,6 @@ public class Turret_ViewControl : MonoBehaviour {
         upDownRange = gData.TopBottomRange;
         leftRightRange = gData.LeftRightRange;
         Filler = GameObject.Find("Data").GetComponent<TextureData>().aoiFiller;
-        aoiScaleFactor = GameObject.Find("Data").GetComponent<GUIData>().AoiScaleFactor;
         areAOIsVisible = GameObject.Find("Turret_System").GetComponent<System_Status>().AOIVisible;
     }
 
@@ -74,28 +73,36 @@ public class Turret_ViewControl : MonoBehaviour {
         {
             float speedRate = ((areaLeft.width - gazeVector.x) / areaLeft.width);
             rotation.y -= gazeRotationSpeed * speedRate * Time.deltaTime;
+            if (rotation.y < -leftRightRange)
+            {
+                rotation.y = -leftRightRange;
+            }
         }
         if (areaRight.Contains(gazeVector))
         {
             float speedRate = ((areaRight.width - (Screen.width - gazeVector.x)) / areaRight.width);
             rotation.y += gazeRotationSpeed * speedRate * Time.deltaTime;
+            if (rotation.y > leftRightRange)
+            {
+                rotation.y = leftRightRange;
+            }
         }
         if (areaTop.Contains(gazeVector))
         {
             float speedRate = (areaTop.height - gazeVector.y) / areaTop.height;
             rotation.x += gazeRotationSpeed * speedRate * Time.deltaTime;
-            if (rotation.x > 70.0f)
+            if (rotation.x > upDownRange)
             {
-                rotation.x = 20.0f;
+                rotation.x = upDownRange;
             }
         }
         if (areaBottom.Contains(gazeVector))
         {
             float speedRate = (areaBottom.height - (Screen.height - gazeVector.y)) / areaBottom.height;
             rotation.x -= gazeRotationSpeed * speedRate * Time.deltaTime;
-            if (rotation.x < -50.0f)
+            if (rotation.x < -upDownRange)
             {
-                rotation.x = -20.0f;
+                rotation.x = -upDownRange;
             }
         }
         gameObject.transform.localRotation = Quaternion.Euler(rotation);

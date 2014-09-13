@@ -6,34 +6,25 @@ public class System_ViewInput : MonoBehaviour {
 
     public delegate void MouseInputEvent(float xAxis, float yAxis);
     public delegate void GazeInputEvent(Vector2 vector);
+    public delegate void CursorEvent(Vector2 pos, string mode);
 
     public static event MouseInputEvent Mouse;
-    public static event GazeInputEvent GazeCursor;
     public static event GazeInputEvent GazeOnly;
-
-    bool GazeAndMouse;
-    bool GazeAndAOI;
-    bool MouseOnly;
-
-	void Start () {
-        GazeAndMouse = this.GetComponent<System_Status>().GazeAndMouse;
-        GazeAndAOI = this.GetComponent<System_Status>().GazeAndAIO;
-        MouseOnly = this.GetComponent<System_Status>().MouseOnly;
-	}
+    public static event CursorEvent DrawCursor;
 	
 	void Update () {
-        if (GazeAndMouse)
+
+        switch (GameObject.Find("Turret_System").GetComponent<System_Status>().SelectedControls)
         {
-            Mouse(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-            GazeCursor((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
-        }
-        else if (GazeAndAOI)
-        {
-            GazeOnly((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
-        }
-        else if (MouseOnly)
-        {
-            Mouse(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            case System_Status.ControlType.GazeAndMouse:
+                Mouse(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+                break;
+            case System_Status.ControlType.GazeAndAOI:
+                GazeOnly((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
+                break;
+            case System_Status.ControlType.MouseOnly:
+                Mouse(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+                break;
         }
 	}
 }

@@ -8,4 +8,6 @@ public class GUIData : MonoBehaviour {
     public float GazeSensitivity;
     public float LeftRightRange;
     public float TopBottomRange;
+    public float PointerFlowSpeed;
+    public float RayCheckRange;
 }
