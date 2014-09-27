@@ -11,53 +11,66 @@ public class System_KeyInput : MonoBehaviour {
     public static event ShootEvent ShootLeft;
     public static event ShootEvent ShootRight;
 
-    private System_Status status;
+    public delegate void LookEvent();
+    public static event LookEvent ResetCamera;
+
+    private ControlOptions controls;
+
+    public bool pauseActive;
 
     void Start()
     {
-        status = GameObject.Find("Turret_System").GetComponent<System_Status>();
+        controls = GameObject.Find("Data").GetComponent<ControlOptions>();
+        pauseActive = false;
     }
 
 	void Update () {
 
-        //Camera Switch Keys
-        if (Input.GetKeyDown(KeyCode.F))
+        if (pauseActive == false)
         {
-            S_KeyInput(KeyCode.F);
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            S_KeyInput(KeyCode.D);
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            S_KeyInput(KeyCode.S);
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            S_KeyInput(KeyCode.A);
-        }
+            //Camera Switch Keys
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                S_KeyInput(KeyCode.F);
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                S_KeyInput(KeyCode.D);
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                S_KeyInput(KeyCode.S);
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                S_KeyInput(KeyCode.A);
+            }
 
-        if (Input.GetKey(KeyCode.J) || Input.GetMouseButton(0))
-        {
-            if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetMouseButton(0))
             {
-                ShootLeft((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
+                if (controls.SelectedControls == ControlOptions.ControlType.GazeAndAOI || controls.SelectedControls == ControlOptions.ControlType.GazeAndMouse)
+                {
+                    ShootLeft((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
+                }
+                else
+                {
+                    ShootLeft(new Vector2(Screen.width / 2, Screen.height / 2));
+                }
             }
-            else
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetMouseButton(1))
             {
-                ShootLeft(new Vector2(Screen.width/2, Screen.height/2));
+                if (controls.SelectedControls == ControlOptions.ControlType.GazeAndAOI || controls.SelectedControls == ControlOptions.ControlType.GazeAndMouse)
+                {
+                    ShootRight((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
+                }
+                else
+                {
+                    ShootRight(new Vector2(Screen.width / 2, Screen.height / 2));
+                }
             }
-        }
-        if (Input.GetKey(KeyCode.K) || Input.GetMouseButton(1))
-        {
-            if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
+            if (Input.GetKey(KeyCode.Space))
             {
-                ShootRight((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
-            }
-            else
-            {
-                ShootRight(new Vector2(Screen.width / 2, Screen.height / 2));
+                ResetCamera();
             }
         }
 	}

@@ -7,8 +7,6 @@ public class MainMenuView : MonoBehaviour {
     public delegate void LoadingAction();
     public static event LoadingAction LoadLevel;
     public GameObject title;
-
-    private int LoadingProgress = 0;
 	
     void OnGUI()
     {

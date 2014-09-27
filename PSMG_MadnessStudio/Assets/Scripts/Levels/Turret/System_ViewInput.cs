@@ -10,21 +10,29 @@ public class System_ViewInput : MonoBehaviour {
 
     public static event MouseInputEvent Mouse;
     public static event GazeInputEvent GazeOnly;
-    public static event CursorEvent DrawCursor;
+
+    public bool pauseActive;
+
+    void Start()
+    {
+        pauseActive = false;
+    }
 	
 	void Update () {
-
-        switch (GameObject.Find("Turret_System").GetComponent<System_Status>().SelectedControls)
+        if (pauseActive == false)
         {
-            case System_Status.ControlType.GazeAndMouse:
-                Mouse(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-                break;
-            case System_Status.ControlType.GazeAndAOI:
-                GazeOnly((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
-                break;
-            case System_Status.ControlType.MouseOnly:
-                Mouse(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-                break;
+            switch (GameObject.Find("Data").GetComponent<ControlOptions>().SelectedControls)
+            {
+                case ControlOptions.ControlType.GazeAndMouse:
+                    Mouse(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+                    break;
+                case ControlOptions.ControlType.GazeAndAOI:
+                    GazeOnly((gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f);
+                    break;
+                case ControlOptions.ControlType.MouseOnly:
+                    Mouse(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+                    break;
+            }
         }
 	}
 }

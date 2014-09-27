@@ -7,12 +7,9 @@ public class AsteroidEngine : MonoBehaviour {
     Vector3 direction;
     Vector3 rotation;
     GameObject explosion;
-    HighScore scoreEngine;
 
     void Start()
     {
-        scoreEngine = GameObject.Find("GUI").GetComponent<HighScore>();
-
         float min = GameObject.Find("AsteroidSpawner").GetComponent<RandomSpawner>().minSpeed;
         float max = GameObject.Find("AsteroidSpawner").GetComponent<RandomSpawner>().maxSpeed;
         speed = Random.Range(min, max);

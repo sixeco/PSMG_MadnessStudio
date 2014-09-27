@@ -25,12 +25,10 @@ public class ShieldEffectScript : MonoBehaviour
 	public GameObject GenericEffect_Plane;
 
     private float damage;
-    private HighScore scoreEngine;
 
     void Awake()
     {
         damage = GameObject.Find("Data").GetComponent<DamageData>().AsteroidDamage;
-        scoreEngine = GameObject.Find("GUI").GetComponent<HighScore>();
     }
 
 	//Instantiate the effect and set some of it's variables

@@ -37,7 +37,7 @@ public class Turret_ViewControl : MonoBehaviour {
         upDownRange = gData.TopBottomRange;
         leftRightRange = gData.LeftRightRange;
         Filler = GameObject.Find("Data").GetComponent<TextureData>().aoiFiller;
-        areAOIsVisible = GameObject.Find("Turret_System").GetComponent<System_Status>().AOIVisible;
+        areAOIsVisible = GameObject.Find("Data").GetComponent<ControlOptions>().AOIVisible;
     }
 
     void Start()
@@ -106,6 +106,17 @@ public class Turret_ViewControl : MonoBehaviour {
             }
         }
         gameObject.transform.localRotation = Quaternion.Euler(rotation);
+    }
+
+    void Update()
+    {
+        Debug.Log(transform.localRotation);
+    }
+
+    public void ReturnCameraToCenter()
+    {
+        Debug.Log("return called" + transform.localRotation + ", " + Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0,0,0), 0.3f));
+        gameObject.transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, 0, 0), 0.3f);
     }
 
     void OnGUI()
