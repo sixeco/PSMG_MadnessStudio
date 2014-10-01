@@ -19,9 +19,9 @@ public class LoadNewLevel : MonoBehaviour {
         MainMenuView.LoadLevel -= LoadLevel;
     }
 
-    void LoadLevel()
+    void LoadLevel(int index)
     {
-        StartCoroutine(DisplayLoadingScreen(LevelToLoad));
+        StartCoroutine(DisplayLoadingScreen(index));
     }
 
     void Awake()
@@ -30,7 +30,7 @@ public class LoadNewLevel : MonoBehaviour {
         ProgressBar.SetActive(false);
     }
 
-    IEnumerator DisplayLoadingScreen(string level)
+    IEnumerator DisplayLoadingScreen(int index)
     {
         LoadingText.SetActive(true);
         ProgressBar.SetActive(true);
@@ -39,7 +39,7 @@ public class LoadNewLevel : MonoBehaviour {
 
         LoadingText.guiText.text = "Loading Progress " + loadProgress + "%";
 
-        AsyncOperation async = Application.LoadLevelAsync(level);
+        AsyncOperation async = Application.LoadLevelAsync(index);
         while (!async.isDone)
         {
             loadProgress = (int)(async.progress * 100);
@@ -48,5 +48,10 @@ public class LoadNewLevel : MonoBehaviour {
 
             yield return null;
         }
+    }
+
+    void OnGUI()
+    {
+        LoadingText.guiText.fontSize = Mathf.Min(Screen.width, Screen.height) / 20;
     }
 }

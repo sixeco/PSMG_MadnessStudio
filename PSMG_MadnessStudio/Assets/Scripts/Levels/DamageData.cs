@@ -7,6 +7,7 @@ public class DamageData : MonoBehaviour {
     public int CobraRailDamage;
     public int TigerRocketDamage;
     public float TigerExplosionRadius;
+    public float TigerRocketMinLifetime;
     public int WoodpeckerGatlingDamage;
 
     public float CobraRailForce;

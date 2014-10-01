@@ -8,14 +8,14 @@ public class AimPointer : MonoBehaviour {
     
     private float LerpSpeed; 
     private Camera cam;
-    private System_Status status;
+    private ControlOptions controls;
     private float RayCheckRange;
     private Vector3 PointerScale;
 
     void Start()
     {
         cam = this.GetComponent<Camera>();
-        status = GameObject.Find("Turret_System").GetComponent<System_Status>();
+        controls = GameObject.Find("Data").GetComponent<ControlOptions>();
         LerpSpeed = GameObject.Find("Data").GetComponent<GUIData>().PointerFlowSpeed;
         RayCheckRange = GameObject.Find("Data").GetComponent<GUIData>().RayCheckRange;
         PointerScale = PointLight.transform.localScale;
@@ -23,14 +23,14 @@ public class AimPointer : MonoBehaviour {
 
     void Update()
     {
-        if (status.SelectedCursorType == System_Status.AimCursorType.LaserPointer)
+        if (controls.SelectedCursorType == ControlOptions.AimCursorType.LaserPointer)
         {
             PointLight.GetComponent<MeshRenderer>().enabled = true;
             Screen.lockCursor = true;
 
             //Shoot out ray based on input type
             Ray ray = new Ray();
-            if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
+            if (controls.SelectedControls == ControlOptions.ControlType.GazeAndAOI || controls.SelectedControls == ControlOptions.ControlType.GazeAndMouse)
             {
                 Vector2 gaze = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
                 ray = cam.ScreenPointToRay(new Vector2(gaze.x, Screen.height - gaze.y));

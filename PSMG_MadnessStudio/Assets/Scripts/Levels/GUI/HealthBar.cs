@@ -23,12 +23,16 @@ public class HealthBar : MonoBehaviour {
 
     void Update()
     {
-        healthScale = Shield.GetComponent<TortoiseLife>().HP / 100;
-        Bar.transform.localScale = new Vector3(originalScaleBar * healthScale, Bar.transform.localScale.y, Bar.transform.localScale.z);
-        //BarOutline.transform.localScale = new Vector3(originalScaleOutline * healthScale, BarOutline.transform.localScale.y, BarOutline.transform.localScale.z);
-        if (originalScaleBar * healthScale < 0.15f)
+        if (Shield.GetComponent<TortoiseLife>().HP > 0)
         {
-            HealthText.enabled = false;
+            healthScale = Shield.GetComponent<TortoiseLife>().HP / 100;
+            Bar.transform.localScale = new Vector3(originalScaleBar * healthScale, Bar.transform.localScale.y, Bar.transform.localScale.z);
+            if (originalScaleBar * healthScale < 0.15f)
+            {
+                HealthText.enabled = false;
+            }
+        }else{
+            Bar.enabled = false;
         }
     }
 }

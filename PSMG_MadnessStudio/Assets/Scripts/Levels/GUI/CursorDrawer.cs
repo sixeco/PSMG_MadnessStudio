@@ -10,7 +10,7 @@ public class CursorDrawer : MonoBehaviour {
     Rect gazeRect;
     Rect mouseRect;
 
-    System_Status status;
+    ControlOptions controls;
     float LerpSpeed;
 
     void Awake()
@@ -24,13 +24,13 @@ public class CursorDrawer : MonoBehaviour {
 
     void Start()
     {
-        status = GameObject.Find("Turret_System").GetComponent<System_Status>();
+        controls = GameObject.Find("Data").GetComponent<ControlOptions>();
         LerpSpeed = GameObject.Find("Data").GetComponent<GUIData>().PointerFlowSpeed;
     }
 
     void Update()
     {
-        if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
+        if (controls.SelectedControls == ControlOptions.ControlType.GazeAndAOI || controls.SelectedControls == ControlOptions.ControlType.GazeAndMouse)
         {
             Vector2 GPos = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
             //gazeRect.x = GPos.x - (gazeTexture.width/2);
@@ -41,21 +41,28 @@ public class CursorDrawer : MonoBehaviour {
         {
             mouseRect.x = (Screen.width / 2) - (mouseTexture.width / 2);
             mouseRect.y = (Screen.height / 2) - (mouseTexture.height / 2);
-            Screen.lockCursor = true;
+            if (GameObject.Find("GameController").GetComponent<PauseGame>().pauseEnabled == false)
+            {
+                Screen.lockCursor = true;
+            }
+
         }
     }
 
     void OnGUI()
     {
-        if (status.SelectedCursorType == System_Status.AimCursorType.GUI)
+        if (GameObject.Find("GameController").GetComponent<PauseGame>().pauseEnabled == false)
         {
-            if (status.SelectedControls == System_Status.ControlType.GazeAndAOI || status.SelectedControls == System_Status.ControlType.GazeAndMouse)
+            if (controls.SelectedCursorType == ControlOptions.AimCursorType.GUI)
             {
-                GUI.DrawTexture(gazeRect, gazeTexture);
-            }
-            else
-            {
-                GUI.DrawTexture(mouseRect, mouseTexture);
+                if (controls.SelectedControls == ControlOptions.ControlType.GazeAndAOI || controls.SelectedControls == ControlOptions.ControlType.GazeAndMouse)
+                {
+                    GUI.DrawTexture(gazeRect, gazeTexture);
+                }
+                else
+                {
+                    GUI.DrawTexture(mouseRect, mouseTexture);
+                }
             }
         }
     }

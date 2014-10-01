@@ -53,10 +53,10 @@ public class TortoiseForcefield : MonoBehaviour {
     {
         if (input_ShapeOptions == ShapeOptions.SphereShape)
         {
-            Vector3 dir = Target.transform.position - transform.position;
-            Quaternion rotation = Quaternion.LookRotation(dir);
+            //Vector3 dir = Target.transform.position - transform.position;
+            //Quaternion rotation = Quaternion.LookRotation(dir);
 
-            GameObject ThisEffect = Instantiate(GenericEffect_Sphere, gameObject.transform.position, rotation) as GameObject;
+            //GameObject ThisEffect = Instantiate(GenericEffect_Sphere, gameObject.transform.position, rotation) as GameObject;
         }
         else
         {

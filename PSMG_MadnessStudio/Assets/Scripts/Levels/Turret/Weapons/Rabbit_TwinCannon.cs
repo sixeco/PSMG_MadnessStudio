@@ -59,10 +59,7 @@ public class Rabbit_TwinCannon : MonoBehaviour {
                 {
                     Quaternion rotation = Quaternion.LookRotation((hitInfo.point - (LowerShotPos.transform.position + LowerShotPos.transform.forward)).normalized);
                     Instantiate(flash, UpperShotPos.position, Camera.transform.localRotation);
-                    Instantiate(projectile, UpperShotPos.position, UpperShotPos.rotation);
-                    //Rigidbody upperShot = Instantiate(projectile, UpperShotPos.position, UpperShotPos.rotation) as Rigidbody;
-                    //Vector3 UpperShotVector = hitInfo.point - upperShot.transform.position;
-                    //upperShot.AddForce(UpperShotVector * shotForce, ForceMode.Acceleration);
+                    Instantiate(projectile, UpperShotPos.position, rotation);
                     turn = !turn;
 
                     int index = Random.Range(0, shotSounds.Length - 1);
@@ -73,10 +70,7 @@ public class Rabbit_TwinCannon : MonoBehaviour {
                 {
                     Quaternion rotation = Quaternion.LookRotation((hitInfo.point - (LowerShotPos.transform.position + LowerShotPos.transform.forward)).normalized);
                     Instantiate(flash, LowerShotPos.position, Camera.transform.localRotation);
-                    Instantiate(projectile, LowerShotPos.position, LowerShotPos.rotation);
-                    //Rigidbody lowerShot = Instantiate(projectile, LowerShotPos.position, LowerShotPos.rotation) as Rigidbody;
-                    //Vector3 LowerShotVector = hitInfo.point - lowerShot.transform.position;
-                    //lowerShot.AddForce(LowerShotVector * shotForce, ForceMode.Acceleration);
+                    Instantiate(projectile, LowerShotPos.position, rotation);
                     turn = !turn;
 
                     int index = Random.Range(0, shotSounds.Length - 1);
