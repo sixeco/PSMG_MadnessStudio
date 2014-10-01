@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ControlOptions : MonoBehaviour {
 
-    public enum ControlType { GazeAndAOI, GazeAndMouse, MouseOnly };
+    public enum ControlType { MouseOnly, GazeAndMouse, GazeAndAOI };
     public ControlType SelectedControls;
 
     public enum AimCursorType { GUI, LaserPointer };

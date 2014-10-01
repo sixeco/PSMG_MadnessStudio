@@ -47,6 +47,7 @@ public class PauseGame : MonoBehaviour {
                 AudioListener.volume = 0;
                 Time.timeScale = 0;
                 Screen.showCursor = true;
+                Screen.lockCursor = false;
             }
         }
         else if (gameOver)

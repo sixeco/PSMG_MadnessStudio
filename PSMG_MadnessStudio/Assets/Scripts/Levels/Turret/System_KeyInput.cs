@@ -11,7 +11,7 @@ public class System_KeyInput : MonoBehaviour {
     public static event ShootEvent ShootLeft;
     public static event ShootEvent ShootRight;
 
-    public delegate void LookEvent();
+    public delegate void LookEvent(bool set);
     public static event LookEvent ResetCamera;
 
     private ControlOptions controls;
@@ -67,10 +67,6 @@ public class System_KeyInput : MonoBehaviour {
                 {
                     ShootRight(new Vector2(Screen.width / 2, Screen.height / 2));
                 }
-            }
-            if (Input.GetKey(KeyCode.Space))
-            {
-                ResetCamera();
             }
         }
 	}

@@ -17,7 +17,6 @@ public class Turret_Activation : MonoBehaviour {
             //Assign Cameraturn event
             System_ViewInput.Mouse += this.GetComponent<Turret_ViewControl>().TurnCameraMouse;
             System_ViewInput.GazeOnly += this.GetComponent<Turret_ViewControl>().TurnCameraGaze;
-            System_KeyInput.ResetCamera += this.GetComponent<Turret_ViewControl>().ReturnCameraToCenter;
             
             //Disable the stand so it becomes invisible
             stand.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
@@ -37,7 +36,6 @@ public class Turret_Activation : MonoBehaviour {
             //Disable Cameraturn event
             System_ViewInput.Mouse -= this.GetComponent<Turret_ViewControl>().TurnCameraMouse;
             System_ViewInput.GazeOnly -= this.GetComponent<Turret_ViewControl>().TurnCameraGaze;
-            System_KeyInput.ResetCamera -= this.GetComponent<Turret_ViewControl>().ReturnCameraToCenter;
 
             //Show Static objects
             frontHead.GetComponent<MeshRenderer>().enabled = true;
