@@ -37,8 +37,8 @@ public class RocketShooter : MonoBehaviour {
                 {
                     Quaternion rotation = Quaternion.LookRotation((hit.point - (rocketShotPos.transform.position + rocketShotPos.transform.forward)).normalized);
                     Instantiate(rocket, rocketShotPos.transform.position + rocketShotPos.transform.forward, rotation);
-                    audio.clip = rocketSound;
-                    audio.Play();
+                    GetComponent<AudioSource>().clip = rocketSound;
+                    GetComponent<AudioSource>().Play();
                 }
             }
         }

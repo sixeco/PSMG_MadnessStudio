@@ -17,6 +17,6 @@ public class ShieldAnimationScript : MonoBehaviour {
 	{
 		offset = new Vector2(offset.x + 0.001f,offset.y);
 
-		renderer.material.SetTextureOffset ("_MainTex", offset);
+		GetComponent<Renderer>().material.SetTextureOffset ("_MainTex", offset);
 	}
 }

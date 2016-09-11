@@ -14,10 +14,10 @@ public class DetonateScript : MonoBehaviour {
         Collider[] colliders = Physics.OverlapSphere(location, 10);
     
         foreach(Collider col in colliders){
-            if(col.rigidbody == null){
+            if(col.GetComponent<Rigidbody>() == null){
                 continue;
             }
-            col.rigidbody.AddExplosionForce(10, location, 10, 0, ForceMode.Impulse);
+            col.GetComponent<Rigidbody>().AddExplosionForce(10, location, 10, 0, ForceMode.Impulse);
         }
 	}
 }

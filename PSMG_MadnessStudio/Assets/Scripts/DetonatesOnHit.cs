@@ -51,12 +51,12 @@ public class DetonatesOnHit : MonoBehaviour {
 
         foreach (Collider c in colliders)
         {
-            if (c.rigidbody == null)
+            if (c.GetComponent<Rigidbody>() == null)
             {
                 continue;
             }
 
-            c.rigidbody.AddExplosionForce(explosionForce, explosionPoint, explosionRadius, explosionAnchor, ForceMode.Impulse);
+            c.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, explosionPoint, explosionRadius, explosionAnchor, ForceMode.Impulse);
             Destroy(gameObject);
 
             HP h = c.GetComponent<HP>();

@@ -18,8 +18,8 @@ public class AsteroidEngine : MonoBehaviour {
         direction.y += Random.Range(-20, 20);
         rotation = new Vector3(Random.Range(min, max), Random.Range(min, max), Random.Range(min, max));
         explosion = GameObject.Find("Data").GetComponent<ModelData>().AIExplosion;
-        gameObject.rigidbody.AddForce(direction * speed, ForceMode.Acceleration);
-        gameObject.rigidbody.AddTorque(rotation * speed, ForceMode.Acceleration);
+        gameObject.GetComponent<Rigidbody>().AddForce(direction * speed, ForceMode.Acceleration);
+        gameObject.GetComponent<Rigidbody>().AddTorque(rotation * speed, ForceMode.Acceleration);
         transform.localScale = Vector3.Lerp(Vector3.zero, transform.localScale, 0.8f);
     }
 

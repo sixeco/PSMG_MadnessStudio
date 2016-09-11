@@ -47,7 +47,7 @@ public class CameraSwitch : MonoBehaviour {
 
     private void setActivation(Camera turret, bool mode)
     {
-        turret.camera.enabled = mode;
+        turret.GetComponent<Camera>().enabled = mode;
         turret.GetComponent<TurretActivation>().isActive = mode;
         turret.GetComponent<AudioListener>().enabled = mode;
     }

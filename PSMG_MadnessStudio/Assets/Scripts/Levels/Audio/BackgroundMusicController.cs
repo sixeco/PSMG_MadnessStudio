@@ -9,7 +9,7 @@ public class BackgroundMusicController : MonoBehaviour {
     void Start()
     {
         int randomIndex = Random.Range(0, BGMusicClips.Length);
-        MusicSource.audio.clip = BGMusicClips[randomIndex];
+        MusicSource.GetComponent<AudioSource>().clip = BGMusicClips[randomIndex];
         MusicSource.Play();
     }
 
@@ -18,7 +18,7 @@ public class BackgroundMusicController : MonoBehaviour {
         if (!MusicSource.isPlaying)
         {
             int randomIndex = Random.Range(0, BGMusicClips.Length);
-            MusicSource.audio.clip = BGMusicClips[randomIndex];
+            MusicSource.GetComponent<AudioSource>().clip = BGMusicClips[randomIndex];
             MusicSource.Play();
         }
     }

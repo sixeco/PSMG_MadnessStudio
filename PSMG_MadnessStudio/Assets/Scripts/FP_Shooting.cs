@@ -17,7 +17,7 @@ public class FP_Shooting : MonoBehaviour {
         {
             Camera cam = Camera.main;
             GameObject theBullet = (GameObject)Instantiate(bullet_prefab,cam.transform.position + cam.transform.forward, cam.transform.rotation);
-            theBullet.rigidbody.AddForce(cam.transform.forward * bulletImpulse, ForceMode.Impulse);
+            theBullet.GetComponent<Rigidbody>().AddForce(cam.transform.forward * bulletImpulse, ForceMode.Impulse);
         }	
 	}
 }

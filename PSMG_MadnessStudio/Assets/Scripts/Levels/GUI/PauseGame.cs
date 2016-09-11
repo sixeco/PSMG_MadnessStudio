@@ -18,7 +18,7 @@ public class PauseGame : MonoBehaviour {
         pauseEnabled = false;
         Time.timeScale = 1;
         AudioListener.volume = 1;
-        Screen.showCursor = false;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -35,7 +35,7 @@ public class PauseGame : MonoBehaviour {
                 pauseEnabled = false;
                 Time.timeScale = 1;
                 AudioListener.volume = 1;
-                Screen.showCursor = false;
+                Cursor.visible = false;
             }
 
             //else if game isn't paused, then pause it
@@ -46,7 +46,7 @@ public class PauseGame : MonoBehaviour {
                 pauseEnabled = true;
                 AudioListener.volume = 0;
                 Time.timeScale = 0;
-                Screen.showCursor = true;
+                Cursor.visible = true;
                 Screen.lockCursor = false;
             }
         }
@@ -57,7 +57,7 @@ public class PauseGame : MonoBehaviour {
             pauseEnabled = true;
             AudioListener.volume = 0;
             Time.timeScale = 0;
-            Screen.showCursor = true;
+            Cursor.visible = true;
         }
     }
 

@@ -22,7 +22,7 @@ public class showShotCursor : MonoBehaviour {
         {
             textureRect.x = Input.mousePosition.x;
             textureRect.y = Screen.height - Input.mousePosition.y;
-            Screen.showCursor = cursorOff;
+            Cursor.visible = cursorOff;
         }
 	}
 

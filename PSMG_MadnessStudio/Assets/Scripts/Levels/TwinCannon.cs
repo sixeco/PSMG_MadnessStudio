@@ -67,7 +67,7 @@ public class TwinCannon : MonoBehaviour {
     {
         if (CoolDownRemain <= 0)
         {
-            Ray ray = this.camera.ScreenPointToRay(MainInput());
+            Ray ray = this.GetComponent<Camera>().ScreenPointToRay(MainInput());
             RaycastHit hitInfo;
 
             if (Physics.Raycast(ray, out hitInfo, RayCheckRange))
@@ -91,20 +91,20 @@ public class TwinCannon : MonoBehaviour {
 
                     CoolDownRemain = CannonCoolDown;
                     int shotIndex = Random.Range(0, 3);
-                    audio.clip = smokeShotSounds[shotIndex]; 
+                    GetComponent<AudioSource>().clip = smokeShotSounds[shotIndex]; 
                 }
                 else
                 {
                     CoolDownRemain = LaserCoolDown;
                     Vector3 hitPoint = hitInfo.point;
                     GameObject LaserCollision = hitInfo.collider.gameObject;
-                    if (LaserCollision.collider != null)
+                    if (LaserCollision.GetComponent<Collider>() != null)
                     {
                         GameObject temp = spark;
-                        if (LaserCollision.rigidbody != null)
+                        if (LaserCollision.GetComponent<Rigidbody>() != null)
                         {
-                            LaserCollision.rigidbody.AddForceAtPosition((LaserCollision.transform.position - hitPoint) * laserForce, hitPoint, ForceMode.Impulse);
-                            Instantiate(temp, hitPoint, LaserCollision.rigidbody.rotation);
+                            LaserCollision.GetComponent<Rigidbody>().AddForceAtPosition((LaserCollision.transform.position - hitPoint) * laserForce, hitPoint, ForceMode.Impulse);
+                            Instantiate(temp, hitPoint, LaserCollision.GetComponent<Rigidbody>().rotation);
                         }
                         else
                         {
@@ -112,9 +112,9 @@ public class TwinCannon : MonoBehaviour {
                         }
                     }
                     int shotIndex = Random.Range(0, 3);
-                    audio.clip = laserShotSounds[shotIndex];
+                    GetComponent<AudioSource>().clip = laserShotSounds[shotIndex];
                 }
-                audio.Play();
+                GetComponent<AudioSource>().Play();
             }
         }
     }

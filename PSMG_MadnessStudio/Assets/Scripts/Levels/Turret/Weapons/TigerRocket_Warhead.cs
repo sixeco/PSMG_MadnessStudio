@@ -84,7 +84,7 @@ public class TigerRocket_Warhead : MonoBehaviour {
                     Collider[] outerColliders = Physics.OverlapSphere(transform.position, ExplosionRadius * 5);
                     foreach (Collider col in outerColliders)
                     {
-                        if (col.rigidbody == null)
+                        if (col.GetComponent<Rigidbody>() == null)
                         {
                             continue;
                         }
@@ -92,7 +92,7 @@ public class TigerRocket_Warhead : MonoBehaviour {
                         if (a != null)
                         {
                             a.AddDamage(damage / 3);
-                            col.rigidbody.AddExplosionForce(50, transform.position, 100, 0, ForceMode.Impulse);
+                            col.GetComponent<Rigidbody>().AddExplosionForce(50, transform.position, 100, 0, ForceMode.Impulse);
                         }
                     }
                     Instantiate(Explosion, transform.position, Quaternion.identity);

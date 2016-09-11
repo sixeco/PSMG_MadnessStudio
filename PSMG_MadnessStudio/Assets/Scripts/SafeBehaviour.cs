@@ -33,8 +33,8 @@ public class SafeBehaviour : MonoBehaviour
     {
         if (combination == secretcombination&&!isOpen)
         {
-            gold.renderer.enabled = false; 
-            animation.Play();
+            gold.GetComponent<Renderer>().enabled = false; 
+            GetComponent<Animation>().Play();
             isOpen = true;
             return true;
         }

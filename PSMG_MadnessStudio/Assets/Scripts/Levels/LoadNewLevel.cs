@@ -37,13 +37,13 @@ public class LoadNewLevel : MonoBehaviour {
 
         ProgressBar.transform.localScale = new Vector3(loadProgress, ProgressBar.transform.localScale.y, ProgressBar.transform.localScale.z);
 
-        LoadingText.guiText.text = "Loading Progress " + loadProgress + "%";
+        LoadingText.GetComponent<GUIText>().text = "Loading Progress " + loadProgress + "%";
 
         AsyncOperation async = Application.LoadLevelAsync(index);
         while (!async.isDone)
         {
             loadProgress = (int)(async.progress * 100);
-            LoadingText.guiText.text = "Loading Progress " + loadProgress + "%";
+            LoadingText.GetComponent<GUIText>().text = "Loading Progress " + loadProgress + "%";
             ProgressBar.transform.localScale = new Vector3(async.progress, ProgressBar.transform.localScale.y, ProgressBar.transform.localScale.z);
 
             yield return null;
@@ -52,6 +52,6 @@ public class LoadNewLevel : MonoBehaviour {
 
     void OnGUI()
     {
-        LoadingText.guiText.fontSize = Mathf.Min(Screen.width, Screen.height) / 20;
+        LoadingText.GetComponent<GUIText>().fontSize = Mathf.Min(Screen.width, Screen.height) / 20;
     }
 }

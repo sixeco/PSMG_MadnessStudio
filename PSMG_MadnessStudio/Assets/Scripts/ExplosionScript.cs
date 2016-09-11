@@ -15,7 +15,7 @@ public class ExplosionScript : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, 100))
             {
-                rigidbody.AddExplosionForce(force, hit.point, radius, 1, ForceMode.Impulse);
+                GetComponent<Rigidbody>().AddExplosionForce(force, hit.point, radius, 1, ForceMode.Impulse);
             }
         }
 	}

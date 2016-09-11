@@ -23,7 +23,7 @@ public class MassExplosionScript : MonoBehaviour {
                 Collider[] colliders = Physics.OverlapSphere(hit.point, radius);
                 
                 foreach(Collider c in colliders){
-                    if (c.rigidbody == null)
+                    if (c.GetComponent<Rigidbody>() == null)
                     {
                         continue;
                     }
@@ -32,7 +32,7 @@ public class MassExplosionScript : MonoBehaviour {
                     //c.rigidbody.AddForce(new Vector3(0, .3f, 1) * force, ForceMode.Impulse);
 
                     //Create Explosion force
-                    c.rigidbody.AddExplosionForce(force, hit.point, explosionRadius, explosionAnchor, ForceMode.Impulse);
+                    c.GetComponent<Rigidbody>().AddExplosionForce(force, hit.point, explosionRadius, explosionAnchor, ForceMode.Impulse);
 
                     //GameObject explosion = Instantiate(expPrefab, hit.point, Quaternion.identity) as GameObject;
                 }

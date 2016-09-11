@@ -13,7 +13,7 @@ public class PokeScript : MonoBehaviour {
         if (Physics.Raycast(ray, out hit, 100))
         {
             //rigidbody.AddForce(new Vector3(0, 0, force), ForceMode.Impulse);
-            rigidbody.AddForceAtPosition((transform.position - hit.point) * force, hit.point, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForceAtPosition((transform.position - hit.point) * force, hit.point, ForceMode.Impulse);
         }
     }
 }

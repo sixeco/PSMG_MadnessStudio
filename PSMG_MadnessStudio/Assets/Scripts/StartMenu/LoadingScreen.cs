@@ -33,13 +33,13 @@ public class LoadingScreen : MonoBehaviour {
 
         progressBar.transform.localScale = new Vector3(loadProgress, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
 
-        text.guiText.text = "Loading Progress " + loadProgress + "%";
+        text.GetComponent<GUIText>().text = "Loading Progress " + loadProgress + "%";
 
         AsyncOperation async = Application.LoadLevelAsync(level);
         while (!async.isDone)
         {
             loadProgress = (int)(async.progress * 100);
-            text.guiText.text = "Loading Progress " + loadProgress + "%";
+            text.GetComponent<GUIText>().text = "Loading Progress " + loadProgress + "%";
             progressBar.transform.localScale = new Vector3(async.progress, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
 
             yield return null;

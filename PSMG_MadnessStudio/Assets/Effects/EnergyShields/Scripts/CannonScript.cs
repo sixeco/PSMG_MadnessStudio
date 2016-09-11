@@ -26,7 +26,7 @@ public class CannonScript : MonoBehaviour {
 			GameObject ThisProjectile = Instantiate(Projectile,gameObject.transform.position,gameObject.transform.rotation) as GameObject;
 
 			//add force to the projectile
-			ThisProjectile.rigidbody.AddRelativeForce(Random.Range(Scatter * -1f, Scatter),Random.Range(Scatter * -1f, Scatter),ProjectileForce + Random.Range(Scatter * -1f, Scatter));
+			ThisProjectile.GetComponent<Rigidbody>().AddRelativeForce(Random.Range(Scatter * -1f, Scatter),Random.Range(Scatter * -1f, Scatter),ProjectileForce + Random.Range(Scatter * -1f, Scatter));
 
 			//set the owner of the projectile...this will allow the shield to determine weather or not to let the projectile pass through
 			if (gameObject.transform.parent == null)

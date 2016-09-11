@@ -39,14 +39,14 @@ public class RocketLauncher : MonoBehaviour {
         if (CoolDownRemain <= 0)
         {
             CoolDownRemain = CoolDownRocket;
-            Ray ray = this.camera.ScreenPointToRay(MainInput());
+            Ray ray = this.GetComponent<Camera>().ScreenPointToRay(MainInput());
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 200f))
             {
                 Quaternion rotation = Quaternion.LookRotation((hit.point - (RocketLauncherShotPos.transform.position + RocketLauncherShotPos.transform.forward)).normalized);
                 Instantiate(RocketObject, RocketLauncherShotPos.transform.position + RocketLauncherShotPos.transform.forward, rotation);
-                audio.clip = rocketSound;
-                audio.Play();
+                GetComponent<AudioSource>().clip = rocketSound;
+                GetComponent<AudioSource>().Play();
             }
         }
     }

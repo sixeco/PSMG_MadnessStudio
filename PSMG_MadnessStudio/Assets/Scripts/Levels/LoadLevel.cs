@@ -29,13 +29,13 @@ public class LoadLevel : MonoBehaviour {
 
         ProgressBar.transform.localScale = new Vector3(loadProgress, ProgressBar.transform.localScale.y, ProgressBar.transform.localScale.z);
 
-        OnLoadText.guiText.text = "Loading Progress " + loadProgress + "%";
+        OnLoadText.GetComponent<GUIText>().text = "Loading Progress " + loadProgress + "%";
 
         AsyncOperation async = Application.LoadLevelAsync(level);
         while (!async.isDone)
         {
             loadProgress = (int)(async.progress * 100);
-            OnLoadText.guiText.text = "Loading Progress " + loadProgress + "%";
+            OnLoadText.GetComponent<GUIText>().text = "Loading Progress " + loadProgress + "%";
             ProgressBar.transform.localScale = new Vector3(async.progress, ProgressBar.transform.localScale.y, ProgressBar.transform.localScale.z);
 
             yield return null;

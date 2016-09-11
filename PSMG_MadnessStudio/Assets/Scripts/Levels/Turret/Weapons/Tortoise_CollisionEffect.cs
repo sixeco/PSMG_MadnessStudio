@@ -11,12 +11,12 @@ public class Tortoise_CollisionEffect : MonoBehaviour {
         {
             if (EffectTime < 450 && EffectTime > 400)
             {
-                renderer.sharedMaterial.SetVector("_ShieldColor", new Vector4(0.7f, 1, 1, 0));
+                GetComponent<Renderer>().sharedMaterial.SetVector("_ShieldColor", new Vector4(0.7f, 1, 1, 0));
             }
 
             EffectTime -= Time.deltaTime * 1000;
 
-            renderer.sharedMaterial.SetFloat("_EffectTime", EffectTime);
+            GetComponent<Renderer>().sharedMaterial.SetFloat("_EffectTime", EffectTime);
         }
     }
 
@@ -24,9 +24,9 @@ public class Tortoise_CollisionEffect : MonoBehaviour {
     {
         foreach (ContactPoint contact in collision.contacts)
         {
-            renderer.sharedMaterial.SetVector("_ShieldColor", new Vector4(0.7f, 1, 1, 0.05f));
+            GetComponent<Renderer>().sharedMaterial.SetVector("_ShieldColor", new Vector4(0.7f, 1, 1, 0.05f));
 
-            renderer.sharedMaterial.SetVector("_Position", transform.InverseTransformPoint(contact.point));
+            GetComponent<Renderer>().sharedMaterial.SetVector("_Position", transform.InverseTransformPoint(contact.point));
 
             EffectTime = 500;
         }

@@ -73,7 +73,7 @@ public class Shooter : MonoBehaviour {
                         coolDownRemain = coolDownGrenade;
                                                                  
                         int shotIndex = Random.Range(0, 3);
-                        audio.clip = smokeShotSounds[shotIndex];              
+                        GetComponent<AudioSource>().clip = smokeShotSounds[shotIndex];              
                     }
                     else if (!shotMode)
                     {
@@ -81,16 +81,16 @@ public class Shooter : MonoBehaviour {
                         Vector3 hitPoint = hitInfo.point;
                         GameObject go = hitInfo.collider.gameObject;
 
-                        if (go.rigidbody != null)
+                        if (go.GetComponent<Rigidbody>() != null)
                         {
-                            go.rigidbody.AddForceAtPosition((go.transform.position - hitPoint) * laserForce, hitPoint, ForceMode.Impulse);
+                            go.GetComponent<Rigidbody>().AddForceAtPosition((go.transform.position - hitPoint) * laserForce, hitPoint, ForceMode.Impulse);
                             GameObject temp = spark;
-                            Instantiate(temp, hitPoint, go.rigidbody.rotation);
+                            Instantiate(temp, hitPoint, go.GetComponent<Rigidbody>().rotation);
                         }
                         int shotIndex = Random.Range(0, 3);
-                        audio.clip = laserShotSounds[shotIndex];
+                        GetComponent<AudioSource>().clip = laserShotSounds[shotIndex];
                     }
-                    audio.Play();
+                    GetComponent<AudioSource>().Play();
                 }
             }
             if (Input.GetKeyDown(KeyCode.J))

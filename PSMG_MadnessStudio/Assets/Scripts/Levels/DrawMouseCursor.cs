@@ -21,7 +21,7 @@ public class DrawMouseCursor : MonoBehaviour {
         {
             textureRect.x = Input.mousePosition.x;
             textureRect.y = Screen.height - Input.mousePosition.y;
-            Screen.showCursor = false;
+            Cursor.visible = false;
         }
         else
         {
